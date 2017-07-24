@@ -10,6 +10,7 @@
 		1A4C29E01F256861002D296C /* Weavy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29D61F256861002D296C /* Weavy.framework */; };
 		1A4C29E51F256861002D296C /* WeavyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29E41F256861002D296C /* WeavyTests.swift */; };
 		1A4C29E71F256861002D296C /* Weavy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A4C29D91F256861002D296C /* Weavy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29F11F2570FC002D296C /* RxSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		1A4C29DF1F256861002D296C /* WeavyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeavyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4C29E41F256861002D296C /* WeavyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeavyTests.swift; sourceTree = "<group>"; };
 		1A4C29E61F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A4C29F11F2570FC002D296C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +59,7 @@
 				1A4C29D81F256861002D296C /* Weavy */,
 				1A4C29E31F256861002D296C /* WeavyTests */,
 				1A4C29D71F256861002D296C /* Products */,
+				1A4C29F01F2570FC002D296C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +90,14 @@
 			path = WeavyTests;
 			sourceTree = "<group>";
 		};
+		1A4C29F01F2570FC002D296C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A4C29F11F2570FC002D296C /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -104,6 +116,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A4C29EA1F256861002D296C /* Build configuration list for PBXNativeTarget "Weavy" */;
 			buildPhases = (
+				1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworsks */,
 				1A4C29D11F256861002D296C /* Sources */,
 				1A4C29D21F256861002D296C /* Frameworks */,
 				1A4C29D31F256861002D296C /* Headers */,
@@ -192,6 +205,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworsks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			name = "⚙Copy Carthage Frameworsks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A4C29D11F256861002D296C /* Sources */ = {
@@ -330,6 +362,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Weavy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -350,6 +386,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Weavy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
