@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Dashboard View Controller1-->
+        <scene sceneID="pv8-ht-M0K">
+            <objects>
+                <viewController id="vFf-Cc-3q4" customClass="DashboardViewController1" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J3f-A1-1Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="REd-hg-ejW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TRD-V9-6JA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dashboard 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqd-XK-fLx">
+                                <rect key="frame" x="16" y="20" width="343" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irm-fn-bnl">
+                                <rect key="frame" x="126" y="318" width="122" height="30"/>
+                                <state key="normal" title="See Movie Details"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfn-mK-QCP">
+                                <rect key="frame" x="147" y="356" width="81" height="30"/>
+                                <state key="normal" title="Onboarding"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sl-hd-QWQ">
+                                <rect key="frame" x="153" y="280" width="68" height="30"/>
+                                <state key="normal" title="See Login"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Rqd-XK-fLx" firstAttribute="top" secondItem="J3f-A1-1Yj" secondAttribute="bottom" id="614-da-6DC"/>
+                            <constraint firstItem="irm-fn-bnl" firstAttribute="centerX" secondItem="Rqd-XK-fLx" secondAttribute="centerX" id="LL9-m1-PQU"/>
+                            <constraint firstItem="irm-fn-bnl" firstAttribute="centerY" secondItem="TRD-V9-6JA" secondAttribute="centerY" id="NgY-fS-cfP"/>
+                            <constraint firstItem="dfn-mK-QCP" firstAttribute="centerX" secondItem="irm-fn-bnl" secondAttribute="centerX" id="Oxz-Hr-70v"/>
+                            <constraint firstItem="8sl-hd-QWQ" firstAttribute="centerX" secondItem="irm-fn-bnl" secondAttribute="centerX" id="hgi-vM-363"/>
+                            <constraint firstItem="Rqd-XK-fLx" firstAttribute="leading" secondItem="TRD-V9-6JA" secondAttribute="leadingMargin" id="qdH-pJ-bPT"/>
+                            <constraint firstItem="irm-fn-bnl" firstAttribute="top" secondItem="8sl-hd-QWQ" secondAttribute="bottom" constant="8" symbolic="YES" id="r0I-qt-kEY"/>
+                            <constraint firstItem="Rqd-XK-fLx" firstAttribute="trailing" secondItem="TRD-V9-6JA" secondAttribute="trailingMargin" id="udI-qU-asg"/>
+                            <constraint firstItem="dfn-mK-QCP" firstAttribute="top" secondItem="irm-fn-bnl" secondAttribute="bottom" constant="8" symbolic="YES" id="yck-NO-peL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="actionButton" destination="irm-fn-bnl" id="vEq-Eq-c0h"/>
+                        <outlet property="loginButton" destination="8sl-hd-QWQ" id="z6j-41-sIF"/>
+                        <outlet property="onBoardingButton" destination="dfn-mK-QCP" id="TYv-Wy-Aaj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JF8-em-oAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.600000000000001" y="110.19490254872565"/>
+        </scene>
+    </scenes>
+</document>

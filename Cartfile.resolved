@@ -1,1 +1,2 @@
 github "ReactiveX/RxSwift" "3.6.1"
+github "RxSwiftCommunity/RxSwiftExt" "2.5.1"
