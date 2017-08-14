@@ -1,0 +1,149 @@
+//
+//  Loom.swift
+//  Weavy
+//
+//  Created by Thibault Wittemberg on 17-07-25.
+//  Copyright © 2017 Warp Factor. All rights reserved.
+//
+
+import Foundation
+import RxSwift
+import RxCocoa
+import RxSwiftExt
+
+public class Loom {
+
+    private var window: UIWindow!
+    private let disposeBag = DisposeBag()
+    private let stitches = PublishSubject<(Patternable, Warp, PresentationStyle?, Stitch)>()
+    private var presentingViewController: UIViewController?
+
+    required public init (fromRootWindow window: UIWindow) {
+
+        self.window = window
+
+        self.stitches.subscribe(onNext: { [unowned self] (pattern, warp, presentationStyle, stitch) in
+
+            var truePresentationStyle = stitch.presentationStyle
+
+            if let forcedPresentationStyle = presentationStyle {
+                truePresentationStyle = forcedPresentationStyle
+            }
+
+            if truePresentationStyle == .dismiss {
+                self.presentingViewController = self.presentingViewController?.presentingViewController
+                self.presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
+                return
+            }
+
+            if let presentable = stitch.presentable as? UIViewController {
+
+                if let weftable = stitch.weftable {
+
+                    presentable.rx.firstTimeViewDidAppear.subscribe(onSuccess: { [unowned self, unowned presentable] (_) in
+
+                        weftable.weft
+                            .pausable(presentable.rx.displayed.startWith(true))
+                            .takeUntil(presentable.rx.dismissInHierarchy)
+                            .asDriver(onErrorJustReturn: pattern.initialWeft).drive(onNext: { [unowned self] (weft) in
+                                self.weave(withPattern: pattern, withWarp: warp, withWeft: weft)
+                            }).disposed(by: self.disposeBag)
+                    }).disposed(by: self.disposeBag)
+                }
+
+                self.present(viewController: presentable, withPresentationStyle: truePresentationStyle)
+
+            }
+
+        }).disposed(by: self.disposeBag)
+    }
+
+    public func weave (withPattern pattern: Patternable) {
+        self.weave(withPattern: pattern, withWarp: pattern.initialWarp)
+    }
+
+    private func weave (withPattern pattern: Patternable, withWarp warp: Warp) {
+        self.weave(withPattern: pattern, withWarp: warp, withWeft: pattern.initialWeft)
+    }
+
+    private func weave (withPattern pattern: Patternable, withWarp warp: Warp, withWeft weft: Weft, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
+        let stitch = pattern.knit(fromWarp: warp, fromWeft: weft, withWoolBag: pattern.woolBag)
+
+        if let subPattern = stitch.pattern {
+            // stitch can be a "link" to a sub pattern
+            self.weave(withPattern: subPattern, withWarp: subPattern.initialWarp, withWeft: subPattern.initialWeft, withPresentationStyle: stitch.presentationStyle)
+        } else if let redirectionWarp = stitch.warp {
+            // stitch can be a "redirection" to another warp in this pattern
+            self.weave(withPattern: pattern, withWarp: redirectionWarp, withWeft: pattern.initialWeft, withPresentationStyle: stitch.presentationStyle)
+        } else {
+            // stitch is a UIViewController to present
+            self.stitches.onNext((pattern, warp, presentationStyle, stitch))
+        }
+    }
+
+    private func present (viewController: UIViewController, withPresentationStyle presentationStyle: PresentationStyle) {
+        self.willNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
+
+        switch presentationStyle {
+        case .none:
+            self.window.rootViewController = viewController
+            self.presentingViewController = viewController
+            break
+        case .show:
+            self.presentingViewController?.show(viewController, sender: nil)
+            self.didNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
+            break
+        case .popup:
+            // if uncomment viewDidDisappear event won't be triggered anymore for popup presenting VCs
+            // and pausable mecanism won't work anymore
+            //                    presentable.modalPresentationStyle = .overFullScreen
+            //                    presentable.modalTransitionStyle = .coverVertical
+            self.presentingViewController?.present(viewController, animated: true, completion: { [unowned self, unowned viewController] in
+                self.didNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
+            })
+            self.presentingViewController = viewController
+            break
+        default:
+            break
+        }
+    }
+
+    @objc func willNavigate (to viewController: UIViewController, withPresentationStyle presentationStyle: String) {
+        // just to observe this func for Reactive extension
+    }
+
+    @objc func didNavigate (to viewController: UIViewController, withPresentationStyle presentationStyle: String) {
+        // just to observe this func for Reactive extension
+    }
+}
+
+extension Loom {
+    //swiftlint:disable:next identifier_name
+    public var rx: Reactive<Loom> {
+        return Reactive<Loom>(self)
+    }
+}
+
+extension Reactive where Base: Loom {
+    public var willNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
+        let source = self.methodInvoked(#selector(Base.willNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
+            if  let viewController = args[0] as? UIViewController,
+                let presentationStyle = args[1] as? String {
+                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
+            }
+            return (nil, nil)
+        }
+        return ControlEvent(events: source)
+    }
+
+    public var didNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
+        let source = self.methodInvoked(#selector(Base.didNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
+            if  let viewController = args[0] as? UIViewController,
+                let presentationStyle = args[1] as? String {
+                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
+            }
+            return (nil, nil)
+        }
+        return ControlEvent(events: source)
+    }
+}

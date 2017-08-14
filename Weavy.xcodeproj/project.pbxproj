@@ -11,6 +11,18 @@
 		1A4C29E51F256861002D296C /* WeavyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29E41F256861002D296C /* WeavyTests.swift */; };
 		1A4C29E71F256861002D296C /* Weavy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A4C29D91F256861002D296C /* Weavy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29F11F2570FC002D296C /* RxSwift.framework */; };
+		1A4C29F61F2589AD002D296C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F51F2589AD002D296C /* Warp.swift */; };
+		1A4C29F81F2589C7002D296C /* Weft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F71F2589C7002D296C /* Weft.swift */; };
+		1A4C29FA1F258C0A002D296C /* Stitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F91F258C0A002D296C /* Stitch.swift */; };
+		1AA9763E1F2805EA00422915 /* Loom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9763D1F2805EA00422915 /* Loom.swift */; };
+		1AA976401F280BC000422915 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9763F1F280BC000422915 /* Presentable.swift */; };
+		1AA976421F280BE700422915 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976411F280BE700422915 /* UIViewController+Presentable.swift */; };
+		1AA976441F280FBE00422915 /* Weftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976431F280FBE00422915 /* Weftable.swift */; };
+		1AA976711F28389B00422915 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA976701F28389B00422915 /* RxCocoa.framework */; };
+		1AA976AB1F2CED3700422915 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */; };
+		1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFD13891F33EA8300047083 /* RxSwiftExt.framework */; };
+		1AFD138C1F3BF20E00047083 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD138B1F3BF20E00047083 /* Pattern.swift */; };
+		1AFD13961F3FA22500047083 /* WoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13951F3FA22500047083 /* WoolBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +43,18 @@
 		1A4C29E41F256861002D296C /* WeavyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeavyTests.swift; sourceTree = "<group>"; };
 		1A4C29E61F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4C29F11F2570FC002D296C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		1A4C29F51F2589AD002D296C /* Warp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
+		1A4C29F71F2589C7002D296C /* Weft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weft.swift; sourceTree = "<group>"; };
+		1A4C29F91F258C0A002D296C /* Stitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stitch.swift; sourceTree = "<group>"; };
+		1AA9763D1F2805EA00422915 /* Loom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loom.swift; sourceTree = "<group>"; };
+		1AA9763F1F280BC000422915 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
+		1AA976411F280BE700422915 /* UIViewController+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentable.swift"; sourceTree = "<group>"; };
+		1AA976431F280FBE00422915 /* Weftable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weftable.swift; sourceTree = "<group>"; };
+		1AA976701F28389B00422915 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		1AFD13891F33EA8300047083 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
+		1AFD138B1F3BF20E00047083 /* Pattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
+		1AFD13951F3FA22500047083 /* WoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoolBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */,
+				1AA976711F28389B00422915 /* RxCocoa.framework in Frameworks */,
 				1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +103,16 @@
 			children = (
 				1A4C29D91F256861002D296C /* Weavy.h */,
 				1A4C29DA1F256861002D296C /* Info.plist */,
+				1A4C29F51F2589AD002D296C /* Warp.swift */,
+				1A4C29F71F2589C7002D296C /* Weft.swift */,
+				1AFD13951F3FA22500047083 /* WoolBag.swift */,
+				1A4C29F91F258C0A002D296C /* Stitch.swift */,
+				1AFD138B1F3BF20E00047083 /* Pattern.swift */,
+				1AA9763D1F2805EA00422915 /* Loom.swift */,
+				1AA9763F1F280BC000422915 /* Presentable.swift */,
+				1AA976431F280FBE00422915 /* Weftable.swift */,
+				1AA976411F280BE700422915 /* UIViewController+Presentable.swift */,
+				1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */,
 			);
 			path = Weavy;
 			sourceTree = "<group>";
@@ -93,6 +129,8 @@
 		1A4C29F01F2570FC002D296C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AFD13891F33EA8300047083 /* RxSwiftExt.framework */,
+				1AA976701F28389B00422915 /* RxCocoa.framework */,
 				1A4C29F11F2570FC002D296C /* RxSwift.framework */,
 			);
 			name = Frameworks;
@@ -117,7 +155,7 @@
 			buildConfigurationList = 1A4C29EA1F256861002D296C /* Build configuration list for PBXNativeTarget "Weavy" */;
 			buildPhases = (
 				1A4C29F41F2585FA002D296C /* ⚙ Swiftlint Code Analysis */,
-				1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworsks */,
+				1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworks */,
 				1A4C29D11F256861002D296C /* Sources */,
 				1A4C29D21F256861002D296C /* Frameworks */,
 				1A4C29D31F256861002D296C /* Headers */,
@@ -163,6 +201,7 @@
 					1A4C29D51F256861002D296C = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3V5265LQM9;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1A4C29DE1F256861002D296C = {
@@ -208,17 +247,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworsks */ = {
+		1A4C29F31F25720C002D296C /* ⚙Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwiftExt.framework",
 			);
-			name = "⚙Copy Carthage Frameworsks";
+			name = "⚙Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwiftExt.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -245,6 +288,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AFD138C1F3BF20E00047083 /* Pattern.swift in Sources */,
+				1AFD13961F3FA22500047083 /* WoolBag.swift in Sources */,
+				1AA9763E1F2805EA00422915 /* Loom.swift in Sources */,
+				1A4C29F61F2589AD002D296C /* Warp.swift in Sources */,
+				1A4C29FA1F258C0A002D296C /* Stitch.swift in Sources */,
+				1AA976401F280BC000422915 /* Presentable.swift in Sources */,
+				1AA976421F280BE700422915 /* UIViewController+Presentable.swift in Sources */,
+				1AA976AB1F2CED3700422915 /* UIViewController+Rx.swift in Sources */,
+				1A4C29F81F2589C7002D296C /* Weft.swift in Sources */,
+				1AA976441F280FBE00422915 /* Weftable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +424,7 @@
 		1A4C29EB1F256861002D296C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
@@ -388,6 +442,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.Weavy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -395,6 +450,7 @@
 		1A4C29EC1F256861002D296C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
@@ -419,6 +475,7 @@
 		1A4C29EE1F256861002D296C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = WeavyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -431,6 +488,7 @@
 		1A4C29EF1F256861002D296C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = WeavyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -459,6 +517,7 @@
 				1A4C29EC1F256861002D296C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A4C29ED1F256861002D296C /* Build configuration list for PBXNativeTarget "WeavyTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +526,7 @@
 				1A4C29EF1F256861002D296C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
