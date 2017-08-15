@@ -30,13 +30,13 @@
 		1AA976A31F2993FB00422915 /* SettingsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9769F1F2993FB00422915 /* SettingsViewController2.swift */; };
 		1AFD13A31F425B0000047083 /* DemoWarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A11F425B0000047083 /* DemoWarp.swift */; };
 		1AFD13A41F425B0000047083 /* DemoWeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A21F425B0000047083 /* DemoWeft.swift */; };
-		1AFD13A81F425B0C00047083 /* ApplicationPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A51F425B0C00047083 /* ApplicationPattern.swift */; };
+		1AFD13A81F425B0C00047083 /* ApplicationWarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A51F425B0C00047083 /* ApplicationWarp.swift */; };
 		1AFD13A91F425B0C00047083 /* ApplicationWeftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A61F425B0C00047083 /* ApplicationWeftable.swift */; };
 		1AFD13AA1F425B0C00047083 /* ApplicationWoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13A71F425B0C00047083 /* ApplicationWoolBag.swift */; };
-		1AFD13AE1F425B1300047083 /* OnboardingPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13AB1F425B1300047083 /* OnboardingPattern.swift */; };
+		1AFD13AE1F425B1300047083 /* OnboardingWarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13AB1F425B1300047083 /* OnboardingWarp.swift */; };
 		1AFD13AF1F425B1300047083 /* OnboardingWeftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13AC1F425B1300047083 /* OnboardingWeftable.swift */; };
 		1AFD13B01F425B1300047083 /* OnboardingWoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13AD1F425B1300047083 /* OnboardingWoolBag.swift */; };
-		1AFD13B41F425B1900047083 /* SettingsPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13B11F425B1900047083 /* SettingsPattern.swift */; };
+		1AFD13B41F425B1900047083 /* SettingsWarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13B11F425B1900047083 /* SettingsWarp.swift */; };
 		1AFD13B51F425B1900047083 /* SettingsWeftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13B21F425B1900047083 /* SettingsWeftable.swift */; };
 		1AFD13B61F425B1900047083 /* SettingsWoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13B31F425B1900047083 /* SettingsWoolBag.swift */; };
 /* End PBXBuildFile section */
@@ -67,13 +67,13 @@
 		1AA9769F1F2993FB00422915 /* SettingsViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController2.swift; sourceTree = "<group>"; };
 		1AFD13A11F425B0000047083 /* DemoWarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoWarp.swift; sourceTree = "<group>"; };
 		1AFD13A21F425B0000047083 /* DemoWeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoWeft.swift; sourceTree = "<group>"; };
-		1AFD13A51F425B0C00047083 /* ApplicationPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationPattern.swift; sourceTree = "<group>"; };
+		1AFD13A51F425B0C00047083 /* ApplicationWarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationWarp.swift; sourceTree = "<group>"; };
 		1AFD13A61F425B0C00047083 /* ApplicationWeftable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationWeftable.swift; sourceTree = "<group>"; };
 		1AFD13A71F425B0C00047083 /* ApplicationWoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationWoolBag.swift; sourceTree = "<group>"; };
-		1AFD13AB1F425B1300047083 /* OnboardingPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPattern.swift; sourceTree = "<group>"; };
+		1AFD13AB1F425B1300047083 /* OnboardingWarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingWarp.swift; sourceTree = "<group>"; };
 		1AFD13AC1F425B1300047083 /* OnboardingWeftable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingWeftable.swift; sourceTree = "<group>"; };
 		1AFD13AD1F425B1300047083 /* OnboardingWoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingWoolBag.swift; sourceTree = "<group>"; };
-		1AFD13B11F425B1900047083 /* SettingsPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPattern.swift; sourceTree = "<group>"; };
+		1AFD13B11F425B1900047083 /* SettingsWarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWarp.swift; sourceTree = "<group>"; };
 		1AFD13B21F425B1900047083 /* SettingsWeftable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWeftable.swift; sourceTree = "<group>"; };
 		1AFD13B31F425B1900047083 /* SettingsWoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWoolBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,7 +194,7 @@
 		1AFD139E1F425AB600047083 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				1AFD13A51F425B0C00047083 /* ApplicationPattern.swift */,
+				1AFD13A51F425B0C00047083 /* ApplicationWarp.swift */,
 				1AFD13A61F425B0C00047083 /* ApplicationWeftable.swift */,
 				1AFD13A71F425B0C00047083 /* ApplicationWoolBag.swift */,
 			);
@@ -204,7 +204,7 @@
 		1AFD139F1F425AC100047083 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				1AFD13AB1F425B1300047083 /* OnboardingPattern.swift */,
+				1AFD13AB1F425B1300047083 /* OnboardingWarp.swift */,
 				1AFD13AC1F425B1300047083 /* OnboardingWeftable.swift */,
 				1AFD13AD1F425B1300047083 /* OnboardingWoolBag.swift */,
 			);
@@ -214,7 +214,7 @@
 		1AFD13A01F425AC800047083 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				1AFD13B11F425B1900047083 /* SettingsPattern.swift */,
+				1AFD13B11F425B1900047083 /* SettingsWarp.swift */,
 				1AFD13B21F425B1900047083 /* SettingsWeftable.swift */,
 				1AFD13B31F425B1900047083 /* SettingsWoolBag.swift */,
 			);
@@ -332,13 +332,13 @@
 				1AA976A31F2993FB00422915 /* SettingsViewController2.swift in Sources */,
 				1AFD13B61F425B1900047083 /* SettingsWoolBag.swift in Sources */,
 				1AFD13AA1F425B0C00047083 /* ApplicationWoolBag.swift in Sources */,
-				1AFD13B41F425B1900047083 /* SettingsPattern.swift in Sources */,
+				1AFD13B41F425B1900047083 /* SettingsWarp.swift in Sources */,
 				1AFD13AF1F425B1300047083 /* OnboardingWeftable.swift in Sources */,
 				1AA976991F2960C700422915 /* OnboardViewController2.swift in Sources */,
 				1AA9769B1F2960C700422915 /* OnboardViewController3.swift in Sources */,
 				1AA976A11F2993FB00422915 /* SettingsViewController1.swift in Sources */,
-				1AFD13AE1F425B1300047083 /* OnboardingPattern.swift in Sources */,
-				1AFD13A81F425B0C00047083 /* ApplicationPattern.swift in Sources */,
+				1AFD13AE1F425B1300047083 /* OnboardingWarp.swift in Sources */,
+				1AFD13A81F425B0C00047083 /* ApplicationWarp.swift in Sources */,
 				1AFD13A31F425B0000047083 /* DemoWarp.swift in Sources */,
 				1AA9768F1F295F4300422915 /* DashboardViewController2.swift in Sources */,
 				1AFD13B51F425B1900047083 /* SettingsWeftable.swift in Sources */,

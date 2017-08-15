@@ -35,17 +35,9 @@ public struct Stitch {
     let presentationStyle: PresentationStyle
     let presentable: Presentable?
     let weftable: Weftable?
-    var pattern: Patternable? {
-        if let innerPattern = self.presentable as? Patternable {
-            return innerPattern
-        }
-
-        return nil
-    }
-
-    var warp: Warp? {
-        if let redirectionWarp = self.presentable as? Warp {
-            return redirectionWarp
+    var linkedWarp: Warp? {
+        if let linkedWarp = self.presentable as? Warp {
+            return linkedWarp
         }
 
         return nil

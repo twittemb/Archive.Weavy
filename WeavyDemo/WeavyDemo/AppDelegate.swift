@@ -21,10 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let window = self.window else { return false }
 
-        let applicationPattern = ApplicationPattern(withInitialWarp: DemoWarp.application, withInitialWeft: DemoWeft.bootstrap, withWoolBag: ApplicationWoolBag())
         loom = Loom(fromRootWindow: window)
-        loom.weave(withPattern: applicationPattern)
-        
+        loom.weave(withWarp: DemoWarp.application.warp)
+
         // FIXME: Reactive extensions (as in UIViewController for instance) do not work this way for method observing
 //        loom.rx.willNavigate.subscribe(onNext: { (toViewController, withPresentationStyle) in
 //            print ("Will navigate to \(String(describing: toViewController)) with presentationStyle \(String(describing: withPresentationStyle))")
@@ -33,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        loom.rx.didNavigate.subscribe(onNext: { (toViewController, withPresentationStyle) in
 //            print ("Did navigate to \(String(describing: toViewController)) with presentationStyle \(String(describing: withPresentationStyle))")
 //        }).disposed(by: self.disposeBag)
-
-
 
         return true
     }
