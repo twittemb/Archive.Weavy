@@ -9,29 +9,25 @@
 import Foundation
 import Weavy
 
-class OnboardingPattern: Patternable {
+class OnboardingWarp: Warp {
 
-    let initialWarp: Warp
     let initialWeft: Weft
     var woolBag: WoolBag
 
-    init(withInitialWarp warp: DemoWarp, withInitialWeft weft: DemoWeft, withWoolBag woolBag: OnboardingWoolBag) {
-        self.initialWarp = warp
+    init(withInitialWeft weft: DemoWeft, withWoolBag woolBag: OnboardingWoolBag) {
         self.initialWeft = weft
         self.woolBag = woolBag
     }
 
-    func knit(fromWarp warp: Warp, fromWeft weft: Weft, withWoolBag woolBag: WoolBag) -> Stitch {
+    func knit(withWeft weft: Weft, usingWoolBag woolBag: WoolBag) -> Stitch {
 
-        guard   let demoWarp = warp as? DemoWarp,
-                demoWarp == DemoWarp.onboarding,
-                let demoWeft = weft as? DemoWeft,
+        guard   let demoWeft = weft as? DemoWeft,
                 let onboardingWoolBag = woolBag as? OnboardingWoolBag else { return Stitch.void }
 
         switch demoWeft {
         case .bootstrap:
             let navigationViewController = UINavigationController()
-            return Stitch(withPresentationStyle: .none, withPresentable: navigationViewController, withWeftable: OnboardingWeftable())
+            return Stitch(withPresentable: navigationViewController, withWeftable: OnboardingWeftable())
         case .needToOnboard:
             let viewController = OnboardViewController1.instantiate()
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)

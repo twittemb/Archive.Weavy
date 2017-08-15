@@ -9,10 +9,11 @@
 import Foundation
 
 public protocol Warp: Presentable {
-}
 
-extension Warp {
-    var type: Warp.Type {
-        return type(of: self)
-    }
+    var initialWeft: Weft { get }
+    var woolBag: WoolBag { get set }
+
+    func knit (withWeft weft: Weft,
+               usingWoolBag woolBag: WoolBag) -> Stitch
+
 }

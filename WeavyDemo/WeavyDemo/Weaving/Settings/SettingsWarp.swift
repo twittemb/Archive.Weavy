@@ -9,29 +9,25 @@
 import Foundation
 import Weavy
 
-class SettingsPattern: Patternable {
+class SettingsWarp: Warp {
 
-    let initialWarp: Warp
     let initialWeft: Weft
     var woolBag: WoolBag
 
-    init(withInitialWarp warp: DemoWarp, withInitialWeft weft: DemoWeft, withWoolBag woolBag: SettingsWoolBag) {
-        self.initialWarp = warp
+    init(withInitialWeft weft: DemoWeft, withWoolBag woolBag: SettingsWoolBag) {
         self.initialWeft = weft
         self.woolBag = woolBag
     }
 
-    func knit(fromWarp warp: Warp, fromWeft weft: Weft, withWoolBag woolBag: WoolBag) -> Stitch {
+    func knit(withWeft weft: Weft, usingWoolBag woolBag: WoolBag) -> Stitch {
 
-        guard   let demoWarp = warp as? DemoWarp,
-                demoWarp == DemoWarp.settings,
-                let demoWeft = weft as? DemoWeft,
+        guard   let demoWeft = weft as? DemoWeft,
                 let settingsWoolBag = woolBag as? SettingsWoolBag else { return Stitch.void }
 
         switch demoWeft {
         case .bootstrap:
             let navigationViewController = UINavigationController()
-            return Stitch(withPresentationStyle: .none, withPresentable: navigationViewController, withWeftable: SettingsWeftable())
+            return Stitch(withPresentable: navigationViewController, withWeftable: SettingsWeftable())
         case .needTheSettings:
             let viewController = SettingsViewController1.instantiate()
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)
