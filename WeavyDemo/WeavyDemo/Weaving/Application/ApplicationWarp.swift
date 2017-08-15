@@ -27,7 +27,7 @@ class ApplicationWarp: Warp {
         switch demoWeft {
         case .bootstrap:
             let navigationViewController = UINavigationController()
-            return Stitch(withPresentationStyle: .none, withPresentable: navigationViewController, withWeftable: ApplicationWeftable())
+            return Stitch(withPresentable: navigationViewController, withWeftable: ApplicationWeftable())
         case .needTheDashboard:
             let viewController = DashboardViewController1.instantiate(withApplicationWoolBag: applicationWoolBag)
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)

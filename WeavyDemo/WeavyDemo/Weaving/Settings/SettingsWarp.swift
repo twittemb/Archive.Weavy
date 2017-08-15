@@ -27,7 +27,7 @@ class SettingsWarp: Warp {
         switch demoWeft {
         case .bootstrap:
             let navigationViewController = UINavigationController()
-            return Stitch(withPresentationStyle: .none, withPresentable: navigationViewController, withWeftable: SettingsWeftable())
+            return Stitch(withPresentable: navigationViewController, withWeftable: SettingsWeftable())
         case .needTheSettings:
             let viewController = SettingsViewController1.instantiate()
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)

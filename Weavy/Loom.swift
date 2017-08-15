@@ -79,7 +79,7 @@ public class Loom {
         self.willNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
 
         switch presentationStyle {
-        case .none:
+        case .root:
             self.window.rootViewController = viewController
             self.presentingViewController = viewController
             break

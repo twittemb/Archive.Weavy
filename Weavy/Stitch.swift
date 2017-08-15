@@ -9,15 +9,15 @@
 import Foundation
 
 public enum PresentationStyle: String {
-    case none
+    case root
     case popup
     case show
     case dismiss
 
     static func fromRaw (raw: String) -> PresentationStyle? {
         switch raw {
-        case PresentationStyle.none.rawValue:
-            return PresentationStyle.none
+        case PresentationStyle.root.rawValue:
+            return PresentationStyle.root
         case PresentationStyle.popup.rawValue:
             return PresentationStyle.popup
         case PresentationStyle.show.rawValue:
@@ -43,7 +43,7 @@ public struct Stitch {
         return nil
     }
 
-    public init (withPresentationStyle presentationStyle: PresentationStyle,
+    public init (withPresentationStyle presentationStyle: PresentationStyle = .root,
                  withPresentable presentable: Presentable? = nil,
                  withWeftable weftable: Weftable? = nil) {
         self.presentationStyle = presentationStyle
@@ -52,7 +52,7 @@ public struct Stitch {
     }
 
     static public var void: Stitch {
-        return Stitch(withPresentationStyle: .none, withPresentable: nil, withWeftable: nil)
+        return Stitch(withPresentationStyle: .root, withPresentable: nil, withWeftable: nil)
     }
 
     static public var end: Stitch {

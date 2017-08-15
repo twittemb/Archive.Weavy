@@ -27,7 +27,7 @@ class OnboardingWarp: Warp {
         switch demoWeft {
         case .bootstrap:
             let navigationViewController = UINavigationController()
-            return Stitch(withPresentationStyle: .none, withPresentable: navigationViewController, withWeftable: OnboardingWeftable())
+            return Stitch(withPresentable: navigationViewController, withWeftable: OnboardingWeftable())
         case .needToOnboard:
             let viewController = OnboardViewController1.instantiate()
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)
