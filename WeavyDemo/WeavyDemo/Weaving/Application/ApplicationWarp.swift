@@ -37,7 +37,7 @@ class ApplicationWarp: Warp {
             return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)
         case .needToLogin:
             let viewController = OnboardViewController3.instantiate()
-            return Stitch(withPresentationStyle: .none, withPresentable: viewController, withWeftable: viewController)
+            return Stitch(withPresentationStyle: .popup, withPresentable: viewController, withWeftable: viewController)
         case .needToOnboard:
             return Stitch(withPresentationStyle: .popup, withPresentable: DemoWarp.onboarding.warp)
         case .needTheSettings:

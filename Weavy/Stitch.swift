@@ -32,7 +32,7 @@ public enum PresentationStyle: String {
 
 public struct Stitch {
 
-    let presentationStyle: PresentationStyle
+    var presentationStyle: PresentationStyle
     let presentable: Presentable?
     let weftable: Weftable?
     var linkedWarp: Warp? {

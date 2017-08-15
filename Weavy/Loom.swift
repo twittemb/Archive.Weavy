@@ -15,22 +15,16 @@ public class Loom {
 
     private var window: UIWindow!
     private let disposeBag = DisposeBag()
-    private let stitches = PublishSubject<(Warp, PresentationStyle?, Stitch)>()
+    private let stitches = PublishSubject<(Warp, Stitch)>()
     private var presentingViewController: UIViewController?
 
     required public init (fromRootWindow window: UIWindow) {
 
         self.window = window
 
-        self.stitches.subscribe(onNext: { [unowned self] (warp, presentationStyle, stitch) in
+        self.stitches.subscribe(onNext: { [unowned self] (warp, stitch) in
 
-            var truePresentationStyle = stitch.presentationStyle
-
-            if let forcedPresentationStyle = presentationStyle {
-                truePresentationStyle = forcedPresentationStyle
-            }
-
-            if truePresentationStyle == .dismiss {
+            if stitch.presentationStyle == .dismiss {
                 self.presentingViewController = self.presentingViewController?.presentingViewController
                 self.presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
                 return
@@ -51,7 +45,7 @@ public class Loom {
                     }).disposed(by: self.disposeBag)
                 }
 
-                self.present(viewController: presentable, withPresentationStyle: truePresentationStyle)
+                self.present(viewController: presentable, withPresentationStyle: stitch.presentationStyle)
 
             }
 
@@ -63,14 +57,21 @@ public class Loom {
     }
 
     private func weave (withWarp warp: Warp, withWeft weft: Weft, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
-        let stitch = warp.knit(withWeft: weft, usingWoolBag: warp.woolBag)
+        // find the stitch according to the warp and weft we are processing
+        var stitch = warp.knit(withWeft: weft, usingWoolBag: warp.woolBag)
+
+        // if we have a forcedPresentationStyle, it means that we come (previous recursive call) from a Stitch that is
+        // a redirection to another Warp ... this is the original stitch PresentationStyle that really matters
+        if let forcedPresentationStyle = presentationStyle {
+            stitch.presentationStyle = forcedPresentationStyle
+        }
 
         if let linkedWarp = stitch.linkedWarp {
             // stitch can be a "link" to a another warp
             self.weave(withWarp: linkedWarp, withWeft: linkedWarp.initialWeft, withPresentationStyle: stitch.presentationStyle)
         } else {
             // stitch is a UIViewController to present
-            self.stitches.onNext((warp, presentationStyle, stitch))
+            self.stitches.onNext((warp, stitch))
         }
     }
 
