@@ -72,7 +72,7 @@ One of the goal of "Weavy" is to promote dependency injection, for valuable reas
 - separate the concerns. It is not the responsability of UIViewControllers, View Models, Presenters or whatever business logic layer to know what types of service to instantiate. They just have to use them, or at least one of their abstraction, and be flexible to an implementation change that can happen in the futur.
 - being able to chose the implementations of services that will be injected to all layers of your application in a early stage of its runtime flow can have a significant advantage in its testability. It is easy to mock services and to inject these fake ones at the application bootstrap.
 
-Let's get back to "Weavy". We saw that combinaisons of Warps and Wefts are weaved into Stitches that represent screens to be displayed. The big advantage of doing this programmatically is that we have the opportunity to inject whatever service we want into the UIViewControllers the Loom will instantiate. The only thing we need at this point is a a mechanism that will help the developper to provide these services.
+Let's get back to Weavy. We saw that combinaisons of Warps and Wefts are weaved into Stitches that represent screens to be displayed. The big advantage of doing this programmatically is that we have the opportunity to inject whatever service we want into the UIViewControllers the Loom will instantiate. The only thing we need at this point is a a mechanism that will help the developper to provide these services.
 
 As well as real Wool is the raw stuff needed to weave some fabric when a warp and a weft are knitted, we need some kind of WoolBag in which developpers will store references to the services that will be needed by the UIViewControllers when they are weaved.
 
@@ -85,3 +85,11 @@ A demo application is provided to illustrate the core mechanisms of weaving. It 
 - a SettingsWarp that represents the settings pages that can be triggered within the second dashboard page. The settings are composed of two screens in a navigation stack.
 
 As we can see, some screens (the login screen for instance) are defined once but used in multiple Warps in different presentation styles. We can clearly see the benefits of decoupling navigation from UIViewControllers.
+
+# Tools & dependencies
+
+Weavy relies on:
+- SwiftLint for static code analysis ([Github SwiftLint](https://github.com/realm/SwiftLint))
+- RxSwift to expose Wefts into Observables the Loom can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
+- RxSwiftExt which adds some usefull reactive operators not included in RxSwift ([Github RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt))
+- Reusable in the Demo App to ease the storyboard cutting into atomic ViewControllers ([Github Reusable](https://github.com/AliSoftware/Reusable))
