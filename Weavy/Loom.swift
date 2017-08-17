@@ -11,6 +11,10 @@ import RxSwift
 import RxCocoa
 import RxSwiftExt
 
+
+/// the only purpose of a Loom is to handle the navigation that is
+/// declared in the Warps of the application. It begins to weave on the root Window
+/// and then produces UIViewControllers as the Stitches are triggered all along the way
 public class Loom {
 
     private var window: UIWindow!
@@ -18,6 +22,9 @@ public class Loom {
     private let stitches = PublishSubject<(Warp, Stitch)>()
     private var presentingViewController: UIViewController?
 
+    /// instantiate the Loom. It only needs the root window of the application
+    ///
+    /// - Parameter window: the root window of the application. it is avalaible in the AppDelegate for instance.
     required public init (fromRootWindow window: UIWindow) {
 
         self.window = window
@@ -38,10 +45,9 @@ public class Loom {
 
                         weftable.weft
                             .pausable(presentable.rx.displayed.startWith(true))
-                            .takeUntil(presentable.rx.dismissInHierarchy)
-                            .asDriver(onErrorJustReturn: warp.initialWeft).drive(onNext: { [unowned self] (weft) in
+                            .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
                                 self.weave(withWarp: warp, withWeft: weft)
-                            }).disposed(by: self.disposeBag)
+                            }).disposed(by: presentable.rxDisposeBag)
                     }).disposed(by: self.disposeBag)
                 }
 
@@ -52,8 +58,29 @@ public class Loom {
         }).disposed(by: self.disposeBag)
     }
 
-    public func weave (withWarp warp: Warp) {
-        self.weave(withWarp: warp, withWeft: warp.initialWeft)
+    /// this function receives the bootstrap Stitch of the application and start the weaving process
+    ///
+    /// - Parameters:
+    ///   - stitch: the bootstrap Stitch of the application. It must be a direct link to a whole Warp with a Weftable that has to trigger the first Weft of the Warp
+    public func weave (withStitch stitch: Stitch) {
+        self.weave(withStitch: stitch, withPresentationStyle: nil)
+    }
+
+    private func weave (withStitch stitch: Stitch, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
+        if  let stitchWarp = stitch.linkedWarp,
+            let stitchWeftable = stitch.weftable {
+            self.weave(withWarp: stitchWarp, withWeftable: stitchWeftable, withPresentationStyle: presentationStyle)
+        } else {
+            fatalError("The Stitch passed to this function must present a Warp with a valid Weft in order to bootstrap a proper navigation")
+        }
+    }
+
+    private func weave (withWarp warp: Warp, withWeftable weftable: Weftable, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
+        // we are weaving a new Warp. We listen to the associated Weftable. This Weftable will give us the first Weft and then eventualy
+        // other Weft that will trigger navigation actions such as popup windows for instance
+        weftable.weft.asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned warp, unowned self] (weft) in
+            self.weave(withWarp: warp, withWeft: weft, withPresentationStyle: presentationStyle)
+        }).disposed(by: warp.rxDisposeBag)
     }
 
     private func weave (withWarp warp: Warp, withWeft weft: Weft, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
@@ -66,11 +93,11 @@ public class Loom {
             stitch.presentationStyle = forcedPresentationStyle
         }
 
-        if let linkedWarp = stitch.linkedWarp {
-            // stitch can be a "link" to a another warp
-            self.weave(withWarp: linkedWarp, withWeft: linkedWarp.initialWeft, withPresentationStyle: stitch.presentationStyle)
+        if stitch.linkedWarp != nil {
+            // stitch presentable can be a "link" to a another warp
+            self.weave(withStitch: stitch, withPresentationStyle: stitch.presentationStyle)
         } else {
-            // stitch is a UIViewController to present
+            // stitch presentable is a UIViewController to present
             self.stitches.onNext((warp, stitch))
         }
     }
@@ -111,33 +138,34 @@ public class Loom {
     }
 }
 
-extension Loom {
-    //swiftlint:disable:next identifier_name
-    public var rx: Reactive<Loom> {
-        return Reactive<Loom>(self)
-    }
-}
-
-extension Reactive where Base: Loom {
-    public var willNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
-        let source = self.methodInvoked(#selector(Base.willNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
-            if  let viewController = args[0] as? UIViewController,
-                let presentationStyle = args[1] as? String {
-                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
-            }
-            return (nil, nil)
-        }
-        return ControlEvent(events: source)
-    }
-
-    public var didNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
-        let source = self.methodInvoked(#selector(Base.didNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
-            if  let viewController = args[0] as? UIViewController,
-                let presentationStyle = args[1] as? String {
-                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
-            }
-            return (nil, nil)
-        }
-        return ControlEvent(events: source)
-    }
-}
+// TODO
+//extension Loom {
+//    //swiftlint:disable:next identifier_name
+//    public var rx: Reactive<Loom> {
+//        return Reactive<Loom>(self)
+//    }
+//}
+//
+//extension Reactive where Base: Loom {
+//    public var willNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
+//        let source = self.methodInvoked(#selector(Base.willNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
+//            if  let viewController = args[0] as? UIViewController,
+//                let presentationStyle = args[1] as? String {
+//                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
+//            }
+//            return (nil, nil)
+//        }
+//        return ControlEvent(events: source)
+//    }
+//
+//    public var didNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
+//        let source = self.methodInvoked(#selector(Base.didNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
+//            if  let viewController = args[0] as? UIViewController,
+//                let presentationStyle = args[1] as? String {
+//                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
+//            }
+//            return (nil, nil)
+//        }
+//        return ControlEvent(events: source)
+//    }
+//}

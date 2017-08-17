@@ -8,11 +8,24 @@
 
 import Foundation
 
+
+/// a Weft describes a possible state of navigation
 public protocol Weft {
 }
 
 extension Weft {
+
+    /// the type of the object that implements the Weft protocol
     var type: Weft.Type {
         return type(of: self)
     }
+
+    /// An empty Weft that is used in the internal weaving process to Drive the navigation without Error
+    var voidWeft: Weft {
+        return VoidWeft()
+    }
+}
+
+/// An empty Weft that is used in the internal weaving process to Drive the navigation without Error
+struct VoidWeft: Weft {
 }

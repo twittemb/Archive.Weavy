@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Loom Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Loom" class="dashAnchor"></a>
+    <a title="Loom Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (97% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Loom Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Loom.html">Loom</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/PresentationStyle.html">PresentationStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Reactive.html">Reactive</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P5Weavy11Presentable">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Warp.html">Warp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P5Weavy4Weft">Weft</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Weftable.html">Weftable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P5Weavy7WoolBag">WoolBag</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Stitch.html">Stitch</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Loom</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Loom</span></code></pre>
+
+                </div>
+              </div>
+            <p>the only purpose of a Loom is to handle the navigation that is
+declared in the Warps of the application. It begins to weave on the root Window
+and then produces UIViewControllers as the Stitches are triggered all along the way</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC5Weavy4LoomcFT14fromRootWindowCSo8UIWindow_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(fromRootWindow:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC5Weavy4LoomcFT14fromRootWindowCSo8UIWindow_S0_">init(fromRootWindow:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>instantiate the Loom. It only needs the root window of the application</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">fromRootWindow</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>window</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the root window of the application. it is avalaible in the AppDelegate for instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC5Weavy4Loom5weaveFT10withStitchVS_6Stitch_T_"></a>
+                    <a name="//apple_ref/swift/Method/weave(withStitch:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC5Weavy4Loom5weaveFT10withStitchVS_6Stitch_T_">weave(withStitch:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>this function receives the bootstrap Stitch of the application and start the weaving process</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">weave</span> <span class="p">(</span><span class="n">withStitch</span> <span class="nv">stitch</span><span class="p">:</span> <span class="kt"><a href="../Structs/Stitch.html">Stitch</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stitch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bootstrap Stitch of the application. It must be a direct link to a whole Warp with a Weftable that has to trigger the first Weft of the Warp</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
