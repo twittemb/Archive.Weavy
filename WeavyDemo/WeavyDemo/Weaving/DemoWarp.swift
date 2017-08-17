@@ -18,11 +18,11 @@ enum DemoWarp {
     var warp: Warp {
         switch self {
         case .application:
-            return ApplicationWarp(withInitialWeft: DemoWeft.bootstrap, withWoolBag: ApplicationWoolBag())
+            return ApplicationWarp(withWoolBag: ApplicationWoolBag())
         case .onboarding:
-            return OnboardingWarp(withInitialWeft: DemoWeft.bootstrap, withWoolBag: OnboardingWoolBag())
+            return OnboardingWarp(withWoolBag: OnboardingWoolBag())
         case .settings:
-            return SettingsWarp(withInitialWeft: DemoWeft.bootstrap, withWoolBag: SettingsWoolBag())
+            return SettingsWarp(withWoolBag: SettingsWoolBag())
         }
     }
 }

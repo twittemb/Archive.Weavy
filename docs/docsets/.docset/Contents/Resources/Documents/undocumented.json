@@ -1,0 +1,12 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/thibaultwittemberg/Development/Weavy/Weavy/Weftable.swift",
+      "line": 16,
+      "symbol": "Weftable.weft",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/thibaultwittemberg/Development/Weavy"
+}

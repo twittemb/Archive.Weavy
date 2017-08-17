@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = self.window else { return false }
 
         loom = Loom(fromRootWindow: window)
-        loom.weave(withWarp: DemoWarp.application.warp)
+        loom.weave(withStitch: Stitch(withPresentable: DemoWarp.application.warp, withWeftable: ApplicationWeftable()))
 
         // FIXME: Reactive extensions (as in UIViewController for instance) do not work this way for method observing
 //        loom.rx.willNavigate.subscribe(onNext: { (toViewController, withPresentationStyle) in

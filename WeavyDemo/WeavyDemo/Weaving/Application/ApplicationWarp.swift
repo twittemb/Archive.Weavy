@@ -8,29 +8,27 @@
 
 import Foundation
 import Weavy
+import RxSwift
 
 class ApplicationWarp: Warp {
 
-    let initialWeft: Weft
-    var woolBag: WoolBag
+    var woolBag: WoolBag?
 
-    init(withInitialWeft weft: DemoWeft, withWoolBag woolBag: ApplicationWoolBag) {
-        self.initialWeft = weft
+    init(withWoolBag woolBag: ApplicationWoolBag) {
         self.woolBag = woolBag
     }
 
-    func knit(withWeft weft: Weft, usingWoolBag woolBag: WoolBag) -> Stitch {
+    func knit(withWeft weft: Weft, usingWoolBag woolBag: WoolBag?) -> Stitch {
 
         guard   let demoWeft = weft as? DemoWeft,
                 let applicationWoolBag = woolBag as? ApplicationWoolBag else { return Stitch.void }
 
         switch demoWeft {
-        case .bootstrap:
-            let navigationViewController = UINavigationController()
-            return Stitch(withPresentable: navigationViewController, withWeftable: ApplicationWeftable())
         case .needTheDashboard:
+            let navigationViewController = UINavigationController()
             let viewController = DashboardViewController1.instantiate(withApplicationWoolBag: applicationWoolBag)
-            return Stitch(withPresentationStyle: .show, withPresentable: viewController, withWeftable: viewController)
+            navigationViewController.viewControllers = [viewController]
+            return Stitch(withPresentable: navigationViewController, withWeftable: viewController)
         case .needTheMovieDetail(let movieTitle):
             let viewController = DashboardViewController2.instantiate()
             viewController.movieTitle = movieTitle
@@ -39,9 +37,9 @@ class ApplicationWarp: Warp {
             let viewController = OnboardViewController3.instantiate()
             return Stitch(withPresentationStyle: .popup, withPresentable: viewController, withWeftable: viewController)
         case .needToOnboard:
-            return Stitch(withPresentationStyle: .popup, withPresentable: DemoWarp.onboarding.warp)
+            return Stitch(withPresentationStyle: .popup, withPresentable: DemoWarp.onboarding.warp, withWeftable: OnboardingWeftable())
         case .needTheSettings:
-            return Stitch(withPresentationStyle: .popup, withPresentable: DemoWarp.settings.warp)
+            return Stitch(withPresentationStyle: .popup, withPresentable: DemoWarp.settings.warp, withWeftable: SettingsWeftable())
         case .loginComplete:
             return Stitch.end
         default:

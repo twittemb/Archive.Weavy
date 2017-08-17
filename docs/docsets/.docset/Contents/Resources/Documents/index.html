@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (97% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Loom.html">Loom</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/PresentationStyle.html">PresentationStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Reactive.html">Reactive</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:P5Weavy11Presentable">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/Warp.html">Warp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:P5Weavy4Weft">Weft</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/Weftable.html">Weftable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:P5Weavy7WoolBag">WoolBag</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Stitch.html">Stitch</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='about' class='heading'>About</h1>
+
+<p>Weavy is a navigation framework for iOS applications based on a weaving pattern</p>
+
+<p>This README is a short story of the whole conception process that leaded me to this framework.</p>
+
+<p>Take a look at this wiki page to learn more about Weavy: <a href="https://github.com/twittemb/Weavy/wiki/Weavy-in-details">Weavy in details</a></p>
+<h1 id='navigation-concerns' class='heading'>Navigation concerns</h1>
+
+<p>Regarding navigation within an iOS application, two choices are available:</p>
+
+<ul>
+<li>Use the builtin mechanism provided by Apple and Xcode: storyboards and segues</li>
+<li>Implement a custom mechanism directly in the code</li>
+</ul>
+
+<p>The disadvantage of these two solutions:</p>
+
+<ul>
+<li>Builtin mechanism: navigation is relatively static and the storyboards are massive. The navigation code pollutes the UIViewControllers</li>
+<li>Custom mechanism: code can be difficult to set up and can be complex depending on the chosen design pattern (Router, Coordinator)</li>
+</ul>
+<h1 id='weavy-aims-to' class='heading'>Weavy aims to</h1>
+
+<ul>
+<li>Promote the cutting of storyboards into atomic units to enable collaboration and reusability of UIViewControllers</li>
+<li>Allow the presentation of a UIViewController in different ways according to the navigation context</li>
+<li>Ease the implementation of dependency injection</li>
+<li>Remove any navigation mechanism from UIViewControllers</li>
+<li>Promote reactive programing</li>
+<li>Express the navigation in a declarative way while addressing the majority of the navigation cases</li>
+<li>Facilitate the cutting of an application into logical blocks of navigation</li>
+</ul>
+<h1 id='the-core-principles' class='heading'>The core principles</h1>
+
+<p>In a real world: <em>Weaving involves using a **loom</em>* to interlace two sets of threads at right angles to each other: the <strong>warp</strong> which runs longitudinally and the <strong>weft</strong> that crosses it*</p>
+
+<p>This is how I imagine the weaving pattern in a simple application:</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/twittemb/Weavy/develop/Resources/weavy_weaving.png" width="480"/>
+</p>
+
+<p>How do I read this ?</p>
+
+<ul>
+<li>Here we have three warps: <strong>Application</strong>, <strong>Onboarding</strong> and <strong>Settings</strong> which describe the three main navigation sections of the application.</li>
+<li>We also have three wefts: <strong>Dashboard</strong> (the default weft triggered at the application bootstrap), <strong>Set the server</strong> and <strong>Login</strong>.</li>
+</ul>
+
+<p>Each one of these wefts will be triggered either because of user actions or because of backend state changes.
+The crossing between a warp and a weft represented by a colored chip will be a specific navigation action (such as a UIViewController appearance).</p>
+
+<p>As we can see, some wefts are used in multiple warps and their triggering will lead to the display of the same screen, but with different presentation options. Sometimes these screens will popup and sometimes they will be pushed in a navigation stack.
+This sketch illustrates how we can factorize UIViewControllers and Storyboards.</p>
+<h2 id='warp-weft-and-stitch' class='heading'>Warp, Weft and Stitch</h2>
+
+<p>Combinaisons of Warps and Wefts describe all the possible navigation patterns within your application.
+Each <strong>warp</strong> defines a clear navigation area (that makes your application divided in well defined parts) in which every <strong>weft</strong> represent a specific presentation of a screen. This representation is called a <strong>Stitch</strong>. A <strong>Stitch</strong> can be presented in different ways such as <q>popup</q> or regular <q>show</q> screens.</p>
+<h2 id='weftable' class='heading'>Weftable</h2>
+
+<p>The basic principle of navigation is very simple: it consists of successive views transitions in response to application state changes. These changes are usually due to users interactions, but they can also come from a low level layer of your application. We can imagine that a lose of network session could lead to a signin screen appearance.</p>
+
+<p>We need a way to express these changes. As we saw, a combinaison of a <strong>Warp</strong> and a <strong>Weft</strong> represent a navigation action. As well as warps can define your application areas, wefts can define these navigation state changes inside these areas.</p>
+
+<p>Considering this, a <strong>Weftable</strong> is basically <q>something</q> in the application which is able to express a new <strong>Weft</strong>, and as a consequence a navigation state change, leading to a navigation action.</p>
+
+<p>A <strong>Weft</strong> can even embed inner values (such as Ids, URLs, &hellip;) that will be propagated to screens presented by the weaving process.</p>
+<h2 id='loom' class='heading'>Loom</h2>
+
+<p>A loom is a just a tool for the developper. Once he has defined the suitable combinations of Warps and Wefts representing the navigation possibilities, the job of the loom is to weave these combinaisons into patterns, according to navigation state changes induced by Weftables. </p>
+
+<p>It is up to the developper to:</p>
+
+<ul>
+<li>define the Warps that represent in the best possible way its application sections (such as Dashboard, Onboarding, Settings, &hellip;) in which significant navigation actions are needed</li>
+<li>provide the Weftables that will trigger the <strong>Loom</strong> weaving process.</li>
+</ul>
+<h2 id='woolbag' class='heading'>Woolbag</h2>
+
+<p>One of the goal of <q>Weavy</q> is to promote dependency injection, for valuable reasons:</p>
+
+<ul>
+<li>avoid using singletons everywhere in your code to reach some low level services</li>
+<li>separate the concerns. It is not up to the UIViewControllers, View Models, Presenters or whatever business logic layer to know what the type of services to instantiate.</li>
+<li>being able to chose the implementations of services that will be injected in a early stage of the application runtime flow. It is a huge benefit for improving testability.</li>
+</ul>
+
+<p>Let&rsquo;s get back to Weavy. We saw that combinaisons of Warps and Wefts are weaved into Stitches that represent screens to be displayed. The big advantage of doing this programmatically is that we have the opportunity to inject whatever service we want into the UIViewControllers the Loom will instantiate. The only thing we need at this point is a a mechanism that will help the developper to provide these services.</p>
+
+<p>As well as real Wool is the raw stuff needed to weave some fabric when a warp and a weft are knitted, we need some kind of WoolBag in which developpers will store references to the services that will be needed by the UIViewControllers when they are weaved.</p>
+
+<p>WoolBags are basically containers that can be injected into whatever the Loom can produce (UIViewControllers, View Models, &hellip;).</p>
+<h2 id='demo-application' class='heading'>Demo Application</h2>
+
+<p>A demo application is provided to illustrate the core mechanisms of weaving. It consists of:</p>
+
+<ul>
+<li>a main ApplicationWarp that represents the basic application navigation (a dashboard composed of two screens in a navigation stack)</li>
+<li>an OnboardingWarp that represents an onboarding wizard that can be triggered within the first dashboard page (or automatically after 10s). The onboarding is composed of three screens in a navigation stack)</li>
+</ul>
+<h1 id='tools-amp-dependencies' class='heading'>Tools &amp; dependencies</h1>
+
+<p>Weavy relies on:</p>
+
+<ul>
+<li>SwiftLint for static code analysis (<a href="https://github.com/realm/SwiftLint">Github SwiftLint</a>)</li>
+<li>RxSwift to expose Wefts into Observables the Loom can react to (<a href="https://github.com/ReactiveX/RxSwift">Github RxSwift</a>)</li>
+<li>RxSwiftExt which adds some usefull reactive operators not included in RxSwift (<a href="https://github.com/RxSwiftCommunity/RxSwiftExt">Github RxSwiftExt</a>)</li>
+<li>Reusable in the Demo App to ease the storyboard cutting into atomic ViewControllers (<a href="https://github.com/AliSoftware/Reusable">Github Reusable</a>)</li>
+</ul>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
