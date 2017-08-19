@@ -9,6 +9,13 @@
 import Foundation
 import RxSwift
 
+/// a Weftable has only one purpose: emit Wefts that correspond that specific navigation states.
+/// the state changes lead to navigation actions in the context of a specific Warp
 public protocol Weftable: class {
     var weft: Observable<Weft> { get }
+}
+
+/// a void Weftable that triggers VoidWefts.
+class VoidWeftable: Weftable {
+    let weft: Observable<Weft> = Observable<Weft>.just(VoidWeft())
 }
