@@ -20,6 +20,7 @@ class OnboardingWeftable: Weftable {
     }()
 
     init() {
+        self.weftSubject.onNext(DemoWeft.needToOnboard)
     }
 
 }

@@ -20,6 +20,7 @@ class SettingsWeftable: Weftable {
     }()
 
     init() {
+        self.weftSubject.onNext(DemoWeft.needTheSettings)
     }
 
 }

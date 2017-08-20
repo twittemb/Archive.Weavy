@@ -20,6 +20,8 @@ class ApplicationWeftable: Weftable {
     }()
 
     init() {
+        self.weftSubject.onNext(DemoWeft.needTheDashboard)
+
         Observable<Int>.timer(10, scheduler: MainScheduler.instance).subscribe(onNext: { (_) in
             // for the purpose of the example, want to login after 10s
             self.weftSubject.onNext(DemoWeft.needToLogin)

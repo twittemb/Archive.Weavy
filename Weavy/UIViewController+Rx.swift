@@ -79,20 +79,20 @@ extension Reactive where Base: UIViewController {
     }
 
     /// Rx observable, triggered when the view is being dismissed
-    public var dismiss: ControlEvent<Bool> {
+    public var dismissed: ControlEvent<Bool> {
         let source = self.sentMessage(#selector(Base.dismiss)).map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
 
     /// Rx observable, triggered when the view or its parent view is being dismissed
-    public var dismissInHierarchy: Observable<Void> {
+    public var dismissedInHierarchy: Observable<Void> {
         var sources = [Observable<Void>]()
 
-        sources.append(self.base.rx.dismiss.map { _ in return Void() })
+        sources.append(self.base.rx.dismissed.map { _ in return Void() })
         sources.append(self.base.rx.willMoveToParentViewController.filter { $0 == nil }.map { _ in return Void() })
 
         if let parent = self.base.parent {
-            sources.append(parent.rx.dismiss.map { _ in return Void() })
+            sources.append(parent.rx.dismissed.map { _ in return Void() })
             sources.append(parent.rx.willMoveToParentViewController.filter { $0 == nil }.map { _ in return Void() })
         }
 

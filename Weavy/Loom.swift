@@ -70,7 +70,7 @@ public class Loom {
             let stitchWeftable = stitch.weftable {
             self.weave(withWarp: stitchWarp, withWeftable: stitchWeftable, withPresentationStyle: presentationStyle)
         } else {
-            fatalError("The Stitch passed to this function must present a Warp with a valid Weft in order to bootstrap a proper navigation")
+            fatalError("The Stitch passed to this function must present a Warp with a valid Weftable in order to bootstrap a proper navigation")
         }
     }
 
@@ -78,6 +78,7 @@ public class Loom {
         // we are weaving a new Warp. We listen to the associated Weftable. This Weftable will give us the first Weft and then eventualy
         // other Weft that will trigger navigation actions such as popup windows for instance
         weftable.weft.asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned warp, unowned self] (weft) in
+            print ("Weftable \(weftable) has triggered a Weft: \(weft)")
             self.weave(withWarp: warp, withWeft: weft, withPresentationStyle: presentationStyle)
         }).disposed(by: warp.rxDisposeBag)
     }
