@@ -25,3 +25,30 @@ public protocol Warp: class, Presentable {
                usingWoolBag woolBag: WoolBag?) -> Stitch
 
 }
+
+fileprivate struct AssociatedKeys {
+    static var displayedSubject = "rx_displayedSubject"
+}
+
+extension Warp {
+    var displayedSubject: PublishSubject<Bool> {
+        var subject: PublishSubject<Bool>!
+        doLocked {
+            let lookup = objc_getAssociatedObject(self, &AssociatedKeys.displayedSubject) as? PublishSubject<Bool>
+            if let lookup = lookup {
+                subject = lookup
+            } else {
+                let newSubject = PublishSubject<Bool>()
+                doLocked {
+                    objc_setAssociatedObject(self, &AssociatedKeys.displayedSubject, newSubject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                }
+                subject = newSubject
+            }
+        }
+        return subject
+    }
+
+    public var rxDisplayed: Observable<Bool> {
+        return self.displayedSubject.asObservable()
+    }
+}

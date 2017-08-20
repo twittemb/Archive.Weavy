@@ -43,7 +43,7 @@ public class Loom {
                     presentable.rx.firstTimeViewDidAppear.subscribe(onSuccess: { [unowned self, unowned presentable] (_) in
 
                         weftable.weft
-                            .pausable(presentable.rx.displayed.startWith(true))
+                            .pausable(presentable.rxDisplayed.startWith(true))
                             .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
                                 self.weave(withWarp: warp, withWeft: weft)
                             }).disposed(by: presentable.rxDisposeBag)
@@ -75,9 +75,9 @@ public class Loom {
     }
 
     private func weave (withWarp warp: Warp, withWeftable weftable: Weftable, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
-        // we are weaving a new Warp. We listen to the associated Weftable. This Weftable will give us the first Weft and then eventualy
-        // other Weft that will trigger navigation actions such as popup windows for instance
-        weftable.weft.asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned warp, unowned self] (weft) in
+        // we are weaving a new Warp. We listen to the associated Weftable (with a pause when the Warp in not currently being displayed).
+        // This Weftable will give us the first Weft and then eventually other Wefts that will trigger navigation actions such as popup windows for instance
+        weftable.weft.pausable(warp.rxDisplayed.startWith(true)).asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned warp, unowned self] (weft) in
             print ("Weftable \(weftable) has triggered a Weft: \(weft)")
             self.weave(withWarp: warp, withWeft: weft, withPresentationStyle: presentationStyle)
         }).disposed(by: warp.rxDisposeBag)
@@ -95,6 +95,8 @@ public class Loom {
 
         if stitch.linkedWarp != nil {
             // stitch presentable can be a "link" to a another warp
+            // here we can tell the actual Warp to pause its Weftable because we enter in another Warp context
+            warp.displayedSubject.onNext(false)
             self.weave(withStitch: stitch, withPresentationStyle: stitch.presentationStyle)
         } else {
             // stitch presentable is a UIViewController to present

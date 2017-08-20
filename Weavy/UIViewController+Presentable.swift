@@ -7,7 +7,11 @@
 //
 
 import Foundation
+import RxSwift
 import UIKit
 
 extension UIViewController: Presentable {
+    public var rxDisplayed: Observable<Bool> {
+        return self.rx.displayed
+    }
 }

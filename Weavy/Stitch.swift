@@ -50,7 +50,7 @@ public enum PresentationStyle: String {
 
 /// a Stitch represents a navigation action. It is built according to a Weft, triggered in the context of a specific Warp. (See Warp.knit())
 /// a Stitch can lead to the presentation of a UIViewController or a link to another Warp
-public struct Stitch: Presentable {
+public struct Stitch {
 
     /// the way we want to present the Presentable exposed in this Stitch
     var presentationStyle: PresentationStyle

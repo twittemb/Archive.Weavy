@@ -12,6 +12,7 @@ import ObjectiveC
 
 /// an abstraction of what can present a Loom. For now, UIViewControllers and Warps are Presentable
 public protocol Presentable {
+    var rxDisplayed: Observable<Bool> { get }
 }
 
 fileprivate struct AssociatedKeys {
@@ -20,7 +21,7 @@ fileprivate struct AssociatedKeys {
 
 extension Presentable {
 
-    fileprivate func doLocked(_ closure: () -> Void) {
+    func doLocked(_ closure: () -> Void) {
         objc_sync_enter(self); defer { objc_sync_exit(self) }
         closure()
     }
