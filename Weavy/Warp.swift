@@ -48,6 +48,7 @@ extension Warp {
         return subject
     }
 
+    /// Rx Observable that triggers a bool indicating if the current Warp is being displayed (one of its UIViewControllers)
     public var rxDisplayed: Observable<Bool> {
         return self.displayedSubject.asObservable()
     }

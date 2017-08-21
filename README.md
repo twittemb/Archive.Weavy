@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/twittemb/Weavy.svg?branch=develop)](https://travis-ci.org/twittemb/Weavy)
+
 # About
 Weavy is a navigation framework for iOS applications based on a weaving pattern
 

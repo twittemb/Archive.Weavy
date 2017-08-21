@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A4C29E01F256861002D296C /* Weavy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29D61F256861002D296C /* Weavy.framework */; };
-		1A4C29E51F256861002D296C /* WeavyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29E41F256861002D296C /* WeavyTests.swift */; };
 		1A4C29E71F256861002D296C /* Weavy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A4C29D91F256861002D296C /* Weavy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29F11F2570FC002D296C /* RxSwift.framework */; };
 		1A4C29F61F2589AD002D296C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F51F2589AD002D296C /* Warp.swift */; };
@@ -20,12 +18,14 @@
 		1AA976441F280FBE00422915 /* Weftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976431F280FBE00422915 /* Weftable.swift */; };
 		1AA976711F28389B00422915 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA976701F28389B00422915 /* RxCocoa.framework */; };
 		1AA976AB1F2CED3700422915 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */; };
+		1AB929901F4CFB3400B40D01 /* WeavyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9298F1F4CFB3400B40D01 /* WeavyTests.swift */; };
+		1AB929921F4CFB3400B40D01 /* Weavy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29D61F256861002D296C /* Weavy.framework */; };
 		1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFD13891F33EA8300047083 /* RxSwiftExt.framework */; };
 		1AFD13961F3FA22500047083 /* WoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13951F3FA22500047083 /* WoolBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A4C29E11F256861002D296C /* PBXContainerItemProxy */ = {
+		1AB929931F4CFB3400B40D01 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A4C29CD1F256861002D296C /* Project object */;
 			proxyType = 1;
@@ -38,9 +38,6 @@
 		1A4C29D61F256861002D296C /* Weavy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Weavy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4C29D91F256861002D296C /* Weavy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weavy.h; sourceTree = "<group>"; };
 		1A4C29DA1F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A4C29DF1F256861002D296C /* WeavyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeavyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A4C29E41F256861002D296C /* WeavyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeavyTests.swift; sourceTree = "<group>"; };
-		1A4C29E61F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4C29F11F2570FC002D296C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A4C29F51F2589AD002D296C /* Warp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
 		1A4C29F71F2589C7002D296C /* Weft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weft.swift; sourceTree = "<group>"; };
@@ -51,6 +48,9 @@
 		1AA976431F280FBE00422915 /* Weftable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weftable.swift; sourceTree = "<group>"; };
 		1AA976701F28389B00422915 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		1AB9298D1F4CFB3400B40D01 /* WeavyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeavyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AB9298F1F4CFB3400B40D01 /* WeavyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeavyTests.swift; sourceTree = "<group>"; };
+		1AB929911F4CFB3400B40D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AFD13891F33EA8300047083 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 		1AFD13951F3FA22500047083 /* WoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoolBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,11 +66,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A4C29DC1F256861002D296C /* Frameworks */ = {
+		1AB9298A1F4CFB3400B40D01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A4C29E01F256861002D296C /* Weavy.framework in Frameworks */,
+				1AB929921F4CFB3400B40D01 /* Weavy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4C29D81F256861002D296C /* Weavy */,
-				1A4C29E31F256861002D296C /* WeavyTests */,
+				1AB9298E1F4CFB3400B40D01 /* WeavyTests */,
 				1A4C29D71F256861002D296C /* Products */,
 				1A4C29F01F2570FC002D296C /* Frameworks */,
 			);
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4C29D61F256861002D296C /* Weavy.framework */,
-				1A4C29DF1F256861002D296C /* WeavyTests.xctest */,
+				1AB9298D1F4CFB3400B40D01 /* WeavyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,15 +114,6 @@
 			path = Weavy;
 			sourceTree = "<group>";
 		};
-		1A4C29E31F256861002D296C /* WeavyTests */ = {
-			isa = PBXGroup;
-			children = (
-				1A4C29E41F256861002D296C /* WeavyTests.swift */,
-				1A4C29E61F256861002D296C /* Info.plist */,
-			);
-			path = WeavyTests;
-			sourceTree = "<group>";
-		};
 		1A4C29F01F2570FC002D296C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +122,15 @@
 				1A4C29F11F2570FC002D296C /* RxSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1AB9298E1F4CFB3400B40D01 /* WeavyTests */ = {
+			isa = PBXGroup;
+			children = (
+				1AB9298F1F4CFB3400B40D01 /* WeavyTests.swift */,
+				1AB929911F4CFB3400B40D01 /* Info.plist */,
+			);
+			path = WeavyTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,22 +167,22 @@
 			productReference = 1A4C29D61F256861002D296C /* Weavy.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1A4C29DE1F256861002D296C /* WeavyTests */ = {
+		1AB9298C1F4CFB3400B40D01 /* WeavyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A4C29ED1F256861002D296C /* Build configuration list for PBXNativeTarget "WeavyTests" */;
+			buildConfigurationList = 1AB929951F4CFB3400B40D01 /* Build configuration list for PBXNativeTarget "WeavyTests" */;
 			buildPhases = (
-				1A4C29DB1F256861002D296C /* Sources */,
-				1A4C29DC1F256861002D296C /* Frameworks */,
-				1A4C29DD1F256861002D296C /* Resources */,
+				1AB929891F4CFB3400B40D01 /* Sources */,
+				1AB9298A1F4CFB3400B40D01 /* Frameworks */,
+				1AB9298B1F4CFB3400B40D01 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1A4C29E21F256861002D296C /* PBXTargetDependency */,
+				1AB929941F4CFB3400B40D01 /* PBXTargetDependency */,
 			);
 			name = WeavyTests;
 			productName = WeavyTests;
-			productReference = 1A4C29DF1F256861002D296C /* WeavyTests.xctest */;
+			productReference = 1AB9298D1F4CFB3400B40D01 /* WeavyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -201,7 +201,7 @@
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
-					1A4C29DE1F256861002D296C = {
+					1AB9298C1F4CFB3400B40D01 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3V5265LQM9;
 						ProvisioningStyle = Automatic;
@@ -221,7 +221,7 @@
 			projectRoot = "";
 			targets = (
 				1A4C29D51F256861002D296C /* Weavy */,
-				1A4C29DE1F256861002D296C /* WeavyTests */,
+				1AB9298C1F4CFB3400B40D01 /* WeavyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -234,7 +234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A4C29DD1F256861002D296C /* Resources */ = {
+		1AB9298B1F4CFB3400B40D01 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,21 +297,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A4C29DB1F256861002D296C /* Sources */ = {
+		1AB929891F4CFB3400B40D01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A4C29E51F256861002D296C /* WeavyTests.swift in Sources */,
+				1AB929901F4CFB3400B40D01 /* WeavyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A4C29E21F256861002D296C /* PBXTargetDependency */ = {
+		1AB929941F4CFB3400B40D01 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A4C29D51F256861002D296C /* Weavy */;
-			targetProxy = 1A4C29E11F256861002D296C /* PBXContainerItemProxy */;
+			targetProxy = 1AB929931F4CFB3400B40D01 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -468,10 +468,9 @@
 			};
 			name = Release;
 		};
-		1A4C29EE1F256861002D296C /* Debug */ = {
+		1AB929961F4CFB3400B40D01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = WeavyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -481,10 +480,9 @@
 			};
 			name = Debug;
 		};
-		1A4C29EF1F256861002D296C /* Release */ = {
+		1AB929971F4CFB3400B40D01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = WeavyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -515,14 +513,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A4C29ED1F256861002D296C /* Build configuration list for PBXNativeTarget "WeavyTests" */ = {
+		1AB929951F4CFB3400B40D01 /* Build configuration list for PBXNativeTarget "WeavyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A4C29EE1F256861002D296C /* Debug */,
-				1A4C29EF1F256861002D296C /* Release */,
+				1AB929961F4CFB3400B40D01 /* Debug */,
+				1AB929971F4CFB3400B40D01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

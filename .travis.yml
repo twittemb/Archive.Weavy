@@ -1,0 +1,14 @@
+language: swift
+osx_image: xcode8.3
+
+cache:
+  directories:
+  - Carthage
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - brew install swiftlint || true
+  - carthage bootstrap --verbose --platform iOS --cache-builds
+script:
+    - xcodebuild clean test -project Weavy.xcodeproj -scheme Weavy -destination "platform=iOS Simulator,name=iPhone 7,OS=10.3.1" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet | xcpretty -c

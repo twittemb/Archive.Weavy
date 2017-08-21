@@ -2,12 +2,11 @@
 //  WeavyTests.swift
 //  WeavyTests
 //
-//  Created by Thibault Wittemberg on 17-07-23.
+//  Created by Thibault Wittemberg on 17-08-22.
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
 import XCTest
-@testable import Weavy
 
 class WeavyTests: XCTestCase {
 

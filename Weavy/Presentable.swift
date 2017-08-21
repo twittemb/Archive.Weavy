@@ -12,6 +12,8 @@ import ObjectiveC
 
 /// an abstraction of what can present a Loom. For now, UIViewControllers and Warps are Presentable
 public protocol Presentable {
+
+    /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController and Warp for instance)
     var rxDisplayed: Observable<Bool> { get }
 }
 

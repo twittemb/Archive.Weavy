@@ -11,6 +11,8 @@ import RxSwift
 import UIKit
 
 extension UIViewController: Presentable {
+    
+    /// Rx Observable that triggers a bool indicating if the current UIViewController is being displayed
     public var rxDisplayed: Observable<Bool> {
         return self.rx.displayed
     }
