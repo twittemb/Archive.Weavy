@@ -38,10 +38,19 @@ public class Loom {
 
             if let presentable = stitch.presentable as? UIViewController {
 
+                // the warp display state depends on its presentable display state
+                // each time any of the warp's presentables is displayed, it means the whole warp
+                // can be considered as currently displayed
+                presentable.rxDisplayed.filter { $0 }.subscribe(onNext: { [unowned warp] _ in
+                    warp.displayedSubject.onNext(true)
+                }).disposed(by: presentable.rxDisposeBag)
+
                 if let weftable = stitch.weftable {
 
                     presentable.rx.firstTimeViewDidAppear.subscribe(onSuccess: { [unowned self, unowned presentable] (_) in
 
+                        // we listen to the presentable weftable. For each new weft value, we trigger a new weaving process
+                        // this is the core principle of the whole navigation process
                         weftable.weft
                             .pausable(presentable.rxDisplayed.startWith(true))
                             .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
@@ -50,6 +59,7 @@ public class Loom {
                     }).disposed(by: self.disposeBag)
                 }
 
+                // presents the presentable according to its presentation style
                 self.present(viewController: presentable, withPresentationStyle: stitch.presentationStyle)
 
             }

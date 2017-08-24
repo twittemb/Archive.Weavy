@@ -1,6 +1,26 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/thibaultwittemberg/Development/Weavy/Weavy/Presentable.swift",
+      "line": 15,
+      "symbol": "Presentable.rxDisplayed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/thibaultwittemberg/Development/Weavy/Weavy/UIViewController+Presentable.swift",
+      "line": 14,
+      "symbol": "UIViewController.rxDisplayed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/thibaultwittemberg/Development/Weavy/Weavy/Warp.swift",
+      "line": 51,
+      "symbol": "Warp.rxDisplayed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/thibaultwittemberg/Development/Weavy"
 }
