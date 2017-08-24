@@ -8,42 +8,16 @@
 
 import Foundation
 import RxSwift
-import ObjectiveC
 
-/// an abstraction of what can present a Loom. For now, UIViewControllers and Warps are Presentable
-public protocol Presentable {
+/// An abstraction of what can present a Loom. For now, UIViewControllers, Warps are Presentable
+public protocol Presentable: HasDisposeBag {
 
-    /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController and Warp for instance)
-    var rxDisplayed: Observable<Bool> { get }
-}
+    /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController, Warp or UIWindow for instance)
+    var rxVisible: Observable<Bool> { get }
 
-fileprivate struct AssociatedKeys {
-    static var disposeBag = "rx_disposeBag"
-}
+    /// Rx Observable (Single trait) triggered when this presentable is displayed for the first time
+    var rxFirstTimeVisible: Single<Void> { get }
 
-extension Presentable {
-
-    func doLocked(_ closure: () -> Void) {
-        objc_sync_enter(self); defer { objc_sync_exit(self) }
-        closure()
-    }
-
-    /// a default Rx Dispose Bag associated to the Presentable lifecycle.
-    /// It allows to dispose weftable subscriptions when this Presentable is deallocated
-    var rxDisposeBag: DisposeBag {
-        var disposeBag: DisposeBag!
-        doLocked {
-            let lookup = objc_getAssociatedObject(self, &AssociatedKeys.disposeBag) as? DisposeBag
-            if let lookup = lookup {
-                disposeBag = lookup
-            } else {
-                let newDisposeBag = DisposeBag()
-                doLocked {
-                    objc_setAssociatedObject(self, &AssociatedKeys.disposeBag, newDisposeBag, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                }
-                disposeBag = newDisposeBag
-            }
-        }
-        return disposeBag
-    }
+    /// Rx Observable (Single trait) triggered when this presentable is dismissed
+    var rxDismissed: Single<Void> { get }
 }

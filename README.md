@@ -70,18 +70,6 @@ It is up to the developper to:
 - define the Warps that represent in the best possible way its application sections (such as Dashboard, Onboarding, Settings, ...) in which significant navigation actions are needed
 - provide the Weftables that will trigger the **Loom** weaving process.
 
-## Woolbag
-One of the goal of "Weavy" is to promote dependency injection, for valuable reasons:
-- avoid using singletons everywhere in your code to reach some low level services
-- separate the concerns. It is not up to the UIViewControllers, View Models, Presenters or whatever business logic layer to know what the type of services to instantiate.
-- being able to chose the implementations of services that will be injected in a early stage of the application runtime flow. It is a huge benefit for improving testability.
-
-Let's get back to Weavy. We saw that combinaisons of Warps and Wefts are weaved into Stitches that represent screens to be displayed. The big advantage of doing this programmatically is that we have the opportunity to inject whatever service we want into the UIViewControllers the Loom will instantiate. The only thing we need at this point is a a mechanism that will help the developper to provide these services.
-
-As well as real Wool is the raw stuff needed to weave some fabric when a warp and a weft are knitted, we need some kind of WoolBag in which developpers will store references to the services that will be needed by the UIViewControllers when they are weaved.
-
-WoolBags are basically containers that can be injected into whatever the Loom can produce (UIViewControllers, View Models, ...).
-
 ## Demo Application
 A demo application is provided to illustrate the core mechanisms of weaving. It consists of:
 - a main ApplicationWarp that represents the basic application navigation (a dashboard composed of two screens in a navigation stack)

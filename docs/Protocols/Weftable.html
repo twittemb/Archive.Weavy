@@ -33,13 +33,11 @@
               <li class="nav-group-task">
                 <a href="../Classes/Loom.html">Loom</a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
-            <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/PresentationStyle.html">PresentationStyle</a>
+                <a href="../Classes/SingleWeftable.html">SingleWeftable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Warps.html">Warps</a>
               </li>
             </ul>
           </li>
@@ -52,30 +50,36 @@
               <li class="nav-group-task">
                 <a href="../Extensions/UIViewController.html">UIViewController</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIWindow.html">UIWindow</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/HasDisposeBag.html">HasDisposeBag</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Presentable.html">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:5Weavy14SynchronizableP">Synchronizable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Warp.html">Warp</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P5Weavy4Weft">Weft</a>
+                <a href="../Protocols.html#/s:5Weavy4WeftP">Weft</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Weftable.html">Weftable</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P5Weavy7WoolBag">WoolBag</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/Stitch.html">Stitch</a>
@@ -90,12 +94,12 @@
             <h1>Weftable</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Weftable</span><span class="p">:</span> <span class="kd">class</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Weftable</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:5Weavy14SynchronizableP">Synchronizable</a></span></code></pre>
 
                 </div>
               </div>
-            <p>a Weftable has only one purpose: emit Wefts that correspond that specific navigation states.
-the state changes lead to navigation actions in the context of a specific Warp</p>
+            <p>a Weftable has only one purpose: emit Wefts that correspond to specific navigation states.
+The state changes lead to navigation actions in the context of a specific Warp</p>
 
           </section>
           <section class="section task-group-section">
@@ -104,10 +108,13 @@ the state changes lead to navigation actions in the context of a specific Warp</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vP5Weavy8Weftable4weftGC7RxSwift10ObservablePS_4Weft__"></a>
+                    <a name="/s:5Weavy8WeftableP4weft7RxSwift10ObservableCyAA4Weft_pGv"></a>
                     <a name="//apple_ref/swift/Property/weft" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP5Weavy8Weftable4weftGC7RxSwift10ObservablePS_4Weft__">weft</a>
+                    <a class="token" href="#/s:5Weavy8WeftableP4weft7RxSwift10ObservableCyAA4Weft_pGv">weft</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -117,11 +124,50 @@ the state changes lead to navigation actions in the context of a specific Warp</
                         <p>the Rx Obsersable that will trigger new Wefts</p>
 
                       </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>the Rx Obsersable that will trigger new Wefts</p>
+
+                      </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">weft</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:P5Weavy4Weft">Weft</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">weft</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:5Weavy4WeftP">Weft</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Weavy8WeftablePAAE11weftSubject7RxSwift08BehaviorD0CyAA4Weft_pGv"></a>
+                    <a name="//apple_ref/swift/Property/weftSubject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Weavy8WeftablePAAE11weftSubject7RxSwift08BehaviorD0CyAA4Weft_pGv">weftSubject</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The weftSubject in which to publish new Wefts</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">weftSubject</span><span class="p">:</span> <span class="kt">BehaviorSubject</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:5Weavy4WeftP">Weft</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -133,8 +179,8 @@ the state changes lead to navigation actions in the context of a specific Warp</
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-23)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-11-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

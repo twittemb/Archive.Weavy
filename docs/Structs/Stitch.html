@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Stitch Struct Reference</title>
+    <title>Stitch Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -11,7 +11,7 @@
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Stitch" class="dashAnchor"></a>
-    <a title="Stitch Struct Reference"></a>
+    <a title="Stitch Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (100% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Stitch Struct Reference
+        Stitch Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -33,13 +33,11 @@
               <li class="nav-group-task">
                 <a href="../Classes/Loom.html">Loom</a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
-            <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/PresentationStyle.html">PresentationStyle</a>
+                <a href="../Classes/SingleWeftable.html">SingleWeftable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Warps.html">Warps</a>
               </li>
             </ul>
           </li>
@@ -52,30 +50,36 @@
               <li class="nav-group-task">
                 <a href="../Extensions/UIViewController.html">UIViewController</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIWindow.html">UIWindow</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/HasDisposeBag.html">HasDisposeBag</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Presentable.html">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:5Weavy14SynchronizableP">Synchronizable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Warp.html">Warp</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P5Weavy4Weft">Weft</a>
+                <a href="../Protocols.html#/s:5Weavy4WeftP">Weft</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Weftable.html">Weftable</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P5Weavy7WoolBag">WoolBag</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/Stitch.html">Stitch</a>
@@ -94,8 +98,10 @@
 
                 </div>
               </div>
-            <p>a Stitch represents a navigation action. It is built according to a Weft, triggered in the context of a specific Warp. (See Warp.knit())
-a Stitch can lead to the presentation of a UIViewController or a link to another Warp</p>
+            <p>A Stitch is the result of the weaving action between a Warp and a Weft (See Warp.knit function)
+It describes the next thing that will be presented (a Presentable) and
+the next thing the Loom will listen to have the next navigation steps (a Weftable).
+If a navigation action does not have to lead to a Stitch, it is possible to have an empty Stitch</p>
 
           </section>
           <section class="section task-group-section">
@@ -104,9 +110,9 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV5Weavy6StitchcFT21withPresentationStyleOS_17PresentationStyle15withPresentableGSqPS_11Presentable__12withWeftableGSqPS_8Weftable___S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(withPresentationStyle:withPresentable:withWeftable:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV5Weavy6StitchcFT21withPresentationStyleOS_17PresentationStyle15withPresentableGSqPS_11Presentable__12withWeftableGSqPS_8Weftable___S0_">init(withPresentationStyle:withPresentable:withWeftable:)</a>
+                    <a name="/s:5Weavy6StitchVAcA11Presentable_pSg04nextC0_AA8Weftable_pSg0dE0tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(nextPresentable:nextWeftable:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Weavy6StitchVAcA11Presentable_pSg04nextC0_AA8Weftable_pSg0dE0tcfc">init(nextPresentable:nextWeftable:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -114,16 +120,14 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>instantiate a new Stitch</p>
+                        <p>Initialize a new Stitch</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">withPresentationStyle</span> <span class="nv">presentationStyle</span><span class="p">:</span> <span class="kt"><a href="../Enums/PresentationStyle.html">PresentationStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">root</span><span class="p">,</span>
-                 <span class="n">withPresentable</span> <span class="nv">presentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-                 <span class="n">withWeftable</span> <span class="nv">weftable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Weftable.html">Weftable</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">nextPresentable</span> <span class="nv">presentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">nextWeftable</span> <span class="nv">weftable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Weftable.html">Weftable</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -134,24 +138,12 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                             <tr>
                               <td>
                                 <code>
-                                <em>presentationStyle</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the way the presentable will be displayed (see PresentationStyle enum)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>presentable</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>the presentable we want to display (can be a UIViewController or a whole Warp)</p>
+                                  <p>the next presentable to be handled by the Loom</p>
                                 </div>
                               </td>
                             </tr>
@@ -163,7 +155,7 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                               </td>
                               <td>
                                 <div>
-                                  <p>the Weftable that will trigger new Weft values for the presented Presentable</p>
+                                  <p>the next weftable to be handled by the Loom</p>
                                 </div>
                               </td>
                             </tr>
@@ -176,9 +168,9 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZvV5Weavy6Stitch4voidS0_"></a>
-                    <a name="//apple_ref/swift/Variable/void" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZvV5Weavy6Stitch4voidS0_">void</a>
+                    <a name="/s:5Weavy6StitchV5emptyACvZ"></a>
+                    <a name="//apple_ref/swift/Variable/empty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Weavy6StitchV5emptyACvZ">empty</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -186,14 +178,14 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>a void Stitch used in the weaving process when no other suitable Stitch has been found. It basically lead to nothing in term of navigation</p>
+                        <p>An empty Stitch that won&rsquo;t be taken care of by the Loom</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">void</span><span class="p">:</span> <span class="kt">Stitch</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">empty</span><span class="p">:</span> <span class="kt">Stitch</span></code></pre>
 
                         </div>
                       </div>
@@ -203,9 +195,9 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZvV5Weavy6Stitch3endS0_"></a>
-                    <a name="//apple_ref/swift/Variable/end" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZvV5Weavy6Stitch3endS0_">end</a>
+                    <a name="/s:5Weavy6StitchV13emptyStitchesSayACGvZ"></a>
+                    <a name="//apple_ref/swift/Variable/emptyStitches" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Weavy6StitchV13emptyStitchesSayACGvZ">emptyStitches</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -213,14 +205,14 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>the Stitch that triggers a dismiss action (see PresentationStyle enum)</p>
+                        <p>Empty Stitches that won&rsquo;t be taken care of by the Loom</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">end</span><span class="p">:</span> <span class="kt">Stitch</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">emptyStitches</span><span class="p">:</span> <span class="p">[</span><span class="kt">Stitch</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -232,8 +224,8 @@ a Stitch can lead to the presentation of a UIViewController or a link to another
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-08-23)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-11-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -8,176 +8,146 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 import RxSwiftExt
 
-/// the only purpose of a Loom is to handle the navigation that is
-/// declared in the Warps of the application. It begins to weave on the root Window
-/// and then produces UIViewControllers as the Stitches are triggered all along the way
-public class Loom {
+/// A WarpWeaver handles the weaving for a dedicated Warp
+/// It will listen for Wefts emitted be the Warp Weftable companion or
+/// the Weftables produced by the Warp.knit function along the way
+class WarpWeaver {
 
-    private var window: UIWindow!
-    private let disposeBag = DisposeBag()
-    private let stitches = PublishSubject<(Warp, Stitch)>()
-    private var presentingViewController: UIViewController?
+    /// The warp to weave
+    private let warp: Warp
 
-    /// instantiate the Loom. It only needs the root window of the application
+    /// The Rx subject that holds all the wefts trigerred either by the Warp's Weftable
+    /// or by the Weftables produced by the Warp.knit function
+    private let wefts = PublishSubject<Weft>()
+
+    /// The Rx subject that holds all the stitch emitted by the Warp.knit function.
+    /// only the Stitches holding a Warp kind of presentable will be pushed into the subject
+    private let stitchesSubject = PublishSubject<Stitch>()
+
+    /// The Rx Stitched Observable fron the stitchesSubject
+    /// It is listened by the Loom
+    internal lazy var stitches: Observable<(Stitch)> = {
+        return self.stitchesSubject.asObservable()
+    }()
+
+    internal let disposeBag = DisposeBag()
+
+    /// Initialize a WarpWeaver
     ///
-    /// - Parameter window: the root window of the application. it is avalaible in the AppDelegate for instance.
-    required public init (fromRootWindow window: UIWindow) {
+    /// - Parameter warp: The Warp to weave
+    init(forWarp warp: Warp) {
+        self.warp = warp
+    }
 
-        self.window = window
+    /// Launch the weaving process
+    ///
+    /// - Parameter weftable: The Weftable that goes with the Warp. It will trigger some Weft at the Warp level (the first one for instance)
+    func weave (listeningToWeftable weftable: Weftable) {
 
-        self.stitches.subscribe(onNext: { [unowned self] (warp, stitch) in
+        // Weft can be emitted by the Weftable companion of the Warp or the weftables in the Stitches fired by the Warp.knit function
+        self.wefts.asObservable().subscribe(onNext: { [unowned self] (weft) in
 
-            if stitch.presentationStyle == .dismiss {
-                self.presentingViewController = self.presentingViewController?.presentingViewController
-                self.presentingViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
-                return
-            }
+            // a new Weft has been triggered for this Warp. Let's knit it and see what Stitches come from that
+            let stitches = self.warp.knit(withWeft: weft)
 
-            if let presentable = stitch.presentable as? UIViewController {
+            // we know which stitches have been triggered by this navigation action
+            // each one of these stitches will lead to a weaving action (for example, new warps to handle and new weftable to listen)
+            stitches.forEach({ [unowned self] (stitch) in
 
-                // the warp display state depends on its presentable display state
-                // each time any of the warp's presentables is displayed, it means the whole warp
-                // can be considered as currently displayed
-                presentable.rxDisplayed.filter { $0 }.subscribe(onNext: { [unowned warp] _ in
-                    warp.displayedSubject.onNext(true)
-                }).disposed(by: presentable.rxDisposeBag)
+                // if the stitch next presentable represents a Warp, it has to be processed at a higher level because
+                // the WarpWeaver only knowns about the warp it's in charge of.
+                // The WarpWeaver will expose it to the Loom via the stitchesSubjects
+                if stitch.nextPresentable is Warp {
+                    self.stitchesSubject.onNext(stitch)
+                } else {
+                    // the stitch next presentable is not a warp, it can be processed at the WarpWeaver level
+                    if  let nextPresentable = stitch.nextPresentable,
+                        let nextWeftable = stitch.nextWeftable {
 
-                if let weftable = stitch.weftable {
+                        // we have to wait for the presentable to be displayed at least once to be able to
+                        // listen to the weftable. Indeed, we do not want to triggered another navigation action
+                        // until there is a first ViewController in the hierarchy
+                        nextPresentable.rxFirstTimeVisible.subscribe(onSuccess: { [unowned self, unowned nextPresentable, unowned nextWeftable] (_) in
 
-                    presentable.rx.firstTimeViewDidAppear.subscribe(onSuccess: { [unowned self, unowned presentable] (_) in
+                            // we listen to the presentable weftable. For each new weft value, we trigger a new weaving process
+                            // this is the core principle of the whole navigation process
+                            // The process is paused each time the presntable is not currently displayed
+                            // for instance when another presentable is above it in the ViewControllers hierarchy.
+                            nextWeftable.weft
+                                .pausable(nextPresentable.rxVisible.startWith(true))
+                                .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
+                                    // the nextPresentable's weftable fires a new weft
+                                    self.wefts.onNext(weft)
+                                }).disposed(by: nextPresentable.disposeBag)
 
-                        // we listen to the presentable weftable. For each new weft value, we trigger a new weaving process
-                        // this is the core principle of the whole navigation process
-                        weftable.weft
-                            .pausable(presentable.rxDisplayed.startWith(true))
-                            .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
-                                self.weave(withWarp: warp, withWeft: weft)
-                            }).disposed(by: presentable.rxDisposeBag)
-                    }).disposed(by: self.disposeBag)
+                        }).disposed(by: self.disposeBag)
+                    }
                 }
 
-                // presents the presentable according to its presentation style
-                self.present(viewController: presentable, withPresentationStyle: stitch.presentationStyle)
-
-            }
-
-        }).disposed(by: self.disposeBag)
-    }
-
-    /// this function receives the bootstrap Stitch of the application and start the weaving process
-    ///
-    /// - Parameters:
-    ///   - stitch: the bootstrap Stitch of the application. It must be a direct link to a whole Warp with a Weftable that has to trigger the first Weft of the Warp
-    public func weave (withStitch stitch: Stitch) {
-        self.weave(withStitch: stitch, withPresentationStyle: nil)
-    }
-
-    private func weave (withStitch stitch: Stitch, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
-        if  let stitchWarp = stitch.linkedWarp,
-            let stitchWeftable = stitch.weftable {
-            self.weave(withWarp: stitchWarp, withWeftable: stitchWeftable, withPresentationStyle: presentationStyle)
-        } else {
-            fatalError("The Stitch passed to this function must present a Warp with a valid Weftable in order to bootstrap a proper navigation")
-        }
-    }
-
-    private func weave (withWarp warp: Warp, withWeftable weftable: Weftable, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
-        // we are weaving a new Warp. We listen to the associated Weftable (with a pause when the Warp in not currently being displayed).
-        // This Weftable will give us the first Weft and then eventually other Wefts that will trigger navigation actions such as popup windows for instance
-        weftable.weft.pausable(warp.rxDisplayed.startWith(true)).asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned warp, unowned self] (weft) in
-            print ("Weftable \(weftable) has triggered a Weft: \(weft)")
-            self.weave(withWarp: warp, withWeft: weft, withPresentationStyle: presentationStyle)
-        }).disposed(by: warp.rxDisposeBag)
-    }
-
-    private func weave (withWarp warp: Warp, withWeft weft: Weft, withPresentationStyle presentationStyle: PresentationStyle? = nil) {
-        // find the stitch according to the warp and weft we are processing
-        var stitch = warp.knit(withWeft: weft, usingWoolBag: warp.woolBag)
-
-        // if we have a forcedPresentationStyle, it means that we come (previous recursive call) from a Stitch that is
-        // a redirection to another Warp ... this is the original stitch PresentationStyle that really matters
-        if let forcedPresentationStyle = presentationStyle {
-            stitch.presentationStyle = forcedPresentationStyle
-        }
-
-        if stitch.linkedWarp != nil {
-            // stitch presentable can be a "link" to a another warp
-            // here we can tell the actual Warp to pause its Weftable because we enter in another Warp context
-            warp.displayedSubject.onNext(false)
-            self.weave(withStitch: stitch, withPresentationStyle: stitch.presentationStyle)
-        } else {
-            // stitch presentable is a UIViewController to present
-            self.stitches.onNext((warp, stitch))
-        }
-    }
-
-    private func present (viewController: UIViewController, withPresentationStyle presentationStyle: PresentationStyle) {
-        self.willNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
-
-        switch presentationStyle {
-        case .root:
-            self.window.rootViewController = viewController
-            self.presentingViewController = viewController
-            break
-        case .show:
-            self.presentingViewController?.show(viewController, sender: nil)
-            self.didNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
-            break
-        case .popup:
-            // if uncomment viewDidDisappear event won't be triggered anymore for popup presenting VCs
-            // and pausable mecanism won't work anymore
-            //                    presentable.modalPresentationStyle = .overFullScreen
-            //                    presentable.modalTransitionStyle = .coverVertical
-            self.presentingViewController?.present(viewController, animated: true, completion: { [unowned self, unowned viewController] in
-                self.didNavigate(to: viewController, withPresentationStyle: presentationStyle.rawValue)
+                // when first presentable is discovered we can assume the Warp is ready to be used (its head can be used in other warps)
+                self.warp.warpReadySubject.onNext(true)
             })
-            self.presentingViewController = viewController
-            break
-        default:
-            break
-        }
-    }
+        }).disposed(by: self.disposeBag)
 
-    @objc func willNavigate (to viewController: UIViewController, withPresentationStyle presentationStyle: String) {
-        // just to observe this func for Reactive extension
-    }
+        // we listen for the Warp dedicated Weftable
+        weftable.weft.pausable(self.warp.rxVisible.startWith(true)).asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
+            // the warp's weftable fires a new weft (the initial weft for exemple)
+            self.wefts.onNext(weft)
+        }).disposed(by: warp.disposeBag)
 
-    @objc func didNavigate (to viewController: UIViewController, withPresentationStyle presentationStyle: String) {
-        // just to observe this func for Reactive extension
     }
 }
 
-// TODO
-//extension Loom {
-//    //swiftlint:disable:next identifier_name
-//    public var rx: Reactive<Loom> {
-//        return Reactive<Loom>(self)
-//    }
-//}
-//
-//extension Reactive where Base: Loom {
-//    public var willNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
-//        let source = self.methodInvoked(#selector(Base.willNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
-//            if  let viewController = args[0] as? UIViewController,
-//                let presentationStyle = args[1] as? String {
-//                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
-//            }
-//            return (nil, nil)
-//        }
-//        return ControlEvent(events: source)
-//    }
-//
-//    public var didNavigate: ControlEvent<(toViewController: UIViewController?, withPresentationStyle: PresentationStyle?)> {
-//        let source = self.methodInvoked(#selector(Base.didNavigate)).map { (args) -> (toViewController: UIViewController?, withPresentationStyle: PresentationStyle?) in
-//            if  let viewController = args[0] as? UIViewController,
-//                let presentationStyle = args[1] as? String {
-//                return (viewController, PresentationStyle.fromRaw(raw: presentationStyle))
-//            }
-//            return (nil, nil)
-//        }
-//        return ControlEvent(events: source)
-//    }
-//}
+/// the only purpose of a Loom is to handle the navigation that is
+/// declared in the Warps of the application.
+public class Loom {
+
+    private var warpWeavers = [WarpWeaver]()
+    private let disposeBag = DisposeBag()
+
+    /// Initialize the Loom
+    public init() {
+    }
+
+    /// Launch the weaving process
+    ///
+    /// - Parameters:
+    ///   - warp: The warp to weave
+    ///   - weftable: The Warp's Weftable companion that will determine the first navigation state for instance
+    public func weave (fromWarp warp: Warp, andWeftable weftable: Weftable) {
+
+        // a new WarpWeaver will handle this warp weaving
+        let warpWeaver = WarpWeaver(forWarp: warp)
+
+        // we stack the WarpWeavers so that we do not lose there reference (whereas it could be a leak)
+        self.warpWeavers.append(warpWeaver)
+
+        // we listen for the Stitches that are exposed by this WarpWeaver
+        // In case those Stitches hlods Warps kind of presentable
+        // We launch a weaving process on them
+        warpWeaver.stitches.subscribe(onNext: { [unowned self] (stitch) in
+
+            guard   let nextWeftable = stitch.nextWeftable else {
+                    print ("A Warp must have a Weftable companion")
+                    return
+            }
+
+            if let nextWarp = stitch.nextPresentable as? Warp {
+                print ("Warp \(warp) has triggered a new Warp \(nextWarp)")
+                self.weave(fromWarp: nextWarp, andWeftable: nextWeftable)
+            }
+
+        }).disposed(by: self.disposeBag)
+
+        // let's weave the Warp
+        warpWeaver.weave(listeningToWeftable: weftable)
+
+        // clear the WarpWeavers stack when the warp has been dismissed (its head has been dismissed)
+        let warpIndex = self.warpWeavers.count-1
+        warp.rxDismissed.subscribe(onSuccess: { [unowned self] (_) in
+            self.warpWeavers.remove(at: warpIndex)
+        }).disposed(by: self.disposeBag)
+    }
+}

@@ -10,15 +10,18 @@ import Foundation
 import Weavy
 
 enum DemoWeft: Weft {
-    case bootstrap
-    case needToOnboard
-    case needToLogin
-    case needTheSettings
-    case needTheDashboard
-    case needTheMovieDetail(withMovieTitle: String)
-    case needToSetServer
-    case loginComplete
-    case welcomeComplete
-    case serverComplete
-    case settingsComplete
+    case apiKey
+    case apiKeyIsComplete
+
+    case movieList
+
+    case moviePicked (withId: Int)
+    case castPicked (withId: Int)
+
+    case settings
+    case settingsDone
+    case about
 }
+
+
+

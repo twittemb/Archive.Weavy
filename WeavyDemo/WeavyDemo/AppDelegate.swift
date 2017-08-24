@@ -9,31 +9,88 @@
 import UIKit
 import Weavy
 import RxSwift
-
+import RxCocoa
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let disposeBag = DisposeBag()
     var window: UIWindow?
-    var loom: Loom!
+    var loom = Loom()
+    let mainWarp = MainWarp()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         guard let window = self.window else { return false }
 
-        loom = Loom(fromRootWindow: window)
-        loom.weave(withStitch: Stitch(withPresentable: DemoWarp.application.warp, withWeftable: ApplicationWeftable()))
+        Warps.whenReady(warp: mainWarp, block: { [unowned window] (head) in
+            window.rootViewController = head
+        })
 
-        // FIXME: Reactive extensions (as in UIViewController for instance) do not work this way for method observing
-//        loom.rx.willNavigate.subscribe(onNext: { (toViewController, withPresentationStyle) in
-//            print ("Will navigate to \(String(describing: toViewController)) with presentationStyle \(String(describing: withPresentationStyle))")
-//        }).disposed(by: self.disposeBag)
-//
-//        loom.rx.didNavigate.subscribe(onNext: { (toViewController, withPresentationStyle) in
-//            print ("Did navigate to \(String(describing: toViewController)) with presentationStyle \(String(describing: withPresentationStyle))")
-//        }).disposed(by: self.disposeBag)
+        loom.weave(fromWarp: mainWarp, andWeftable: SingleWeftable(withInitialWeft: DemoWeft.apiKey))
 
         return true
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

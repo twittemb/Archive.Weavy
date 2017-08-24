@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="pv8-ht-M0K">
+            <objects>
+                <viewController id="vFf-Cc-3q4" customClass="SettingsViewController" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J3f-A1-1Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="REd-hg-ejW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TRD-V9-6JA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="cXG-oX-j4H">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pyu-XI-2aZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTb-e6-7Mj">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tmdb" translatesAutoresizingMaskIntoConstraints="NO" id="xTI-pj-leh">
+                                                <rect key="frame" x="12" y="75" width="350" height="100"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="xTI-pj-leh" secondAttribute="height" multiplier="7:2" id="D1p-8z-iA4"/>
+                                                    <constraint firstAttribute="height" constant="100" id="Ibb-C4-mje"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="xTI-pj-leh" firstAttribute="centerY" secondItem="RTb-e6-7Mj" secondAttribute="centerY" id="0Ct-RM-3Ef"/>
+                                            <constraint firstAttribute="height" constant="250" id="FdX-Y8-UMN"/>
+                                            <constraint firstItem="xTI-pj-leh" firstAttribute="centerX" secondItem="RTb-e6-7Mj" secondAttribute="centerX" id="Zrm-Fd-iDn"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Api Key" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D4g-Vd-tE5">
+                                        <rect key="frame" x="47.5" y="313.5" width="280" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="0.49634132922535212" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="sLu-cJ-ZR5"/>
+                                            <constraint firstAttribute="width" constant="280" id="vGl-1X-OBD"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxs-1d-oI9">
+                                        <rect key="frame" x="47" y="587" width="280" height="40"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="wPu-2M-gd6"/>
+                                        </constraints>
+                                        <state key="normal" title="Proceed">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Mxs-1d-oI9" secondAttribute="bottom" constant="40" id="COe-5z-2lg"/>
+                                    <constraint firstItem="Mxs-1d-oI9" firstAttribute="width" secondItem="D4g-Vd-tE5" secondAttribute="width" id="DDO-jI-8HP"/>
+                                    <constraint firstItem="RTb-e6-7Mj" firstAttribute="leading" secondItem="Pyu-XI-2aZ" secondAttribute="leading" id="Y9b-x1-COl"/>
+                                    <constraint firstAttribute="trailing" secondItem="RTb-e6-7Mj" secondAttribute="trailing" id="ehF-vr-Y7i"/>
+                                    <constraint firstItem="D4g-Vd-tE5" firstAttribute="centerY" secondItem="Pyu-XI-2aZ" secondAttribute="centerY" id="ghd-LI-NAD"/>
+                                    <constraint firstItem="D4g-Vd-tE5" firstAttribute="centerX" secondItem="RTb-e6-7Mj" secondAttribute="centerX" id="ntS-yL-uWi"/>
+                                    <constraint firstItem="Mxs-1d-oI9" firstAttribute="centerX" secondItem="Pyu-XI-2aZ" secondAttribute="centerX" id="oyc-l0-hUc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RTb-e6-7Mj" firstAttribute="top" secondItem="J3f-A1-1Yj" secondAttribute="bottom" constant="-20" id="0KV-hc-SAX"/>
+                            <constraint firstItem="Pyu-XI-2aZ" firstAttribute="top" secondItem="cXG-oX-j4H" secondAttribute="top" id="10d-Bd-lr1"/>
+                            <constraint firstAttribute="trailing" secondItem="cXG-oX-j4H" secondAttribute="trailing" id="1mX-6P-sw1"/>
+                            <constraint firstItem="Pyu-XI-2aZ" firstAttribute="bottom" secondItem="REd-hg-ejW" secondAttribute="top" id="HMQ-HF-tsk"/>
+                            <constraint firstItem="cXG-oX-j4H" firstAttribute="leading" secondItem="TRD-V9-6JA" secondAttribute="leading" id="Oph-fa-1za"/>
+                            <constraint firstItem="cXG-oX-j4H" firstAttribute="top" secondItem="TRD-V9-6JA" secondAttribute="top" id="RQc-3P-oOZ"/>
+                            <constraint firstItem="Pyu-XI-2aZ" firstAttribute="trailing" secondItem="cXG-oX-j4H" secondAttribute="trailing" id="fpq-oI-2Ah"/>
+                            <constraint firstItem="cXG-oX-j4H" firstAttribute="bottom" secondItem="REd-hg-ejW" secondAttribute="top" id="nkJ-zn-GKD"/>
+                            <constraint firstItem="Pyu-XI-2aZ" firstAttribute="leading" secondItem="cXG-oX-j4H" secondAttribute="leading" id="qHh-LH-fQf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="proceedButton" destination="Mxs-1d-oI9" id="p4d-rI-gyy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JF8-em-oAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.600000000000001" y="110.19490254872565"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="mainBackground" width="750" height="1334"/>
+        <image name="tmdb" width="750" height="296"/>
+    </resources>
+</document>

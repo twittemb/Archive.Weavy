@@ -32,8 +32,8 @@ extension Reactive where Base: UIViewController {
     }
 
     /// Rx observable, triggered when the view has appeared for the first time
-    public var firstTimeViewDidAppear: Single<Bool> {
-        return self.sentMessage(#selector(Base.viewDidAppear)).map { $0.first as? Bool ?? false }.take(1).asSingle()
+    public var firstTimeViewDidAppear: Single<Void> {
+        return self.sentMessage(#selector(Base.viewDidAppear)).map(to: Void()).take(1).asSingle()
     }
 
     /// Rx observable, triggered when the view will disappear

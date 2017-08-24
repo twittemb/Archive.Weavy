@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1DD1B71F81C4CF003D2B24 /* UIWindow+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DD1B61F81C4CF003D2B24 /* UIWindow+Rx.swift */; };
 		1A4C29E71F256861002D296C /* Weavy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A4C29D91F256861002D296C /* Weavy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29F11F2570FC002D296C /* RxSwift.framework */; };
 		1A4C29F61F2589AD002D296C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F51F2589AD002D296C /* Warp.swift */; };
 		1A4C29F81F2589C7002D296C /* Weft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F71F2589C7002D296C /* Weft.swift */; };
-		1A4C29FA1F258C0A002D296C /* Stitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F91F258C0A002D296C /* Stitch.swift */; };
+		1A6B76631F675FE7005A560F /* UIWindow+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */; };
+		1A83EE9F1FB2397D00597078 /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A83EE9E1FB2397D00597078 /* Synchronizable.swift */; };
 		1AA9763E1F2805EA00422915 /* Loom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9763D1F2805EA00422915 /* Loom.swift */; };
 		1AA976401F280BC000422915 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9763F1F280BC000422915 /* Presentable.swift */; };
 		1AA976421F280BE700422915 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976411F280BE700422915 /* UIViewController+Presentable.swift */; };
@@ -20,8 +22,9 @@
 		1AA976AB1F2CED3700422915 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */; };
 		1AB929901F4CFB3400B40D01 /* WeavyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9298F1F4CFB3400B40D01 /* WeavyTests.swift */; };
 		1AB929921F4CFB3400B40D01 /* Weavy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29D61F256861002D296C /* Weavy.framework */; };
+		1AB97F641F8C557C0058FA0D /* Stitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB97F631F8C557C0058FA0D /* Stitch.swift */; };
+		1AB97F661F9049390058FA0D /* HasDisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB97F651F9049380058FA0D /* HasDisposeBag.swift */; };
 		1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFD13891F33EA8300047083 /* RxSwiftExt.framework */; };
-		1AFD13961F3FA22500047083 /* WoolBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD13951F3FA22500047083 /* WoolBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +38,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A1DD1B61F81C4CF003D2B24 /* UIWindow+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Rx.swift"; sourceTree = "<group>"; };
+		1A3E11BA1F6CC44900B0693B /* NSObject_Rx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSObject_Rx.framework; path = Carthage/Build/iOS/NSObject_Rx.framework; sourceTree = "<group>"; };
 		1A4C29D61F256861002D296C /* Weavy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Weavy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4C29D91F256861002D296C /* Weavy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weavy.h; sourceTree = "<group>"; };
 		1A4C29DA1F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4C29F11F2570FC002D296C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A4C29F51F2589AD002D296C /* Warp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
 		1A4C29F71F2589C7002D296C /* Weft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weft.swift; sourceTree = "<group>"; };
-		1A4C29F91F258C0A002D296C /* Stitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stitch.swift; sourceTree = "<group>"; };
+		1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Presentable.swift"; sourceTree = "<group>"; };
+		1A83EE9E1FB2397D00597078 /* Synchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
 		1AA9763D1F2805EA00422915 /* Loom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loom.swift; sourceTree = "<group>"; };
 		1AA9763F1F280BC000422915 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		1AA976411F280BE700422915 /* UIViewController+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentable.swift"; sourceTree = "<group>"; };
@@ -51,8 +57,9 @@
 		1AB9298D1F4CFB3400B40D01 /* WeavyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeavyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB9298F1F4CFB3400B40D01 /* WeavyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeavyTests.swift; sourceTree = "<group>"; };
 		1AB929911F4CFB3400B40D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AB97F631F8C557C0058FA0D /* Stitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stitch.swift; sourceTree = "<group>"; };
+		1AB97F651F9049380058FA0D /* HasDisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDisposeBag.swift; sourceTree = "<group>"; };
 		1AFD13891F33EA8300047083 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
-		1AFD13951F3FA22500047083 /* WoolBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoolBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +110,16 @@
 				1A4C29DA1F256861002D296C /* Info.plist */,
 				1A4C29F51F2589AD002D296C /* Warp.swift */,
 				1A4C29F71F2589C7002D296C /* Weft.swift */,
-				1AFD13951F3FA22500047083 /* WoolBag.swift */,
-				1A4C29F91F258C0A002D296C /* Stitch.swift */,
+				1AB97F631F8C557C0058FA0D /* Stitch.swift */,
 				1AA9763D1F2805EA00422915 /* Loom.swift */,
 				1AA9763F1F280BC000422915 /* Presentable.swift */,
 				1AA976431F280FBE00422915 /* Weftable.swift */,
+				1AB97F651F9049380058FA0D /* HasDisposeBag.swift */,
+				1A83EE9E1FB2397D00597078 /* Synchronizable.swift */,
 				1AA976411F280BE700422915 /* UIViewController+Presentable.swift */,
+				1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */,
 				1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */,
+				1A1DD1B61F81C4CF003D2B24 /* UIWindow+Rx.swift */,
 			);
 			path = Weavy;
 			sourceTree = "<group>";
@@ -117,6 +127,7 @@
 		1A4C29F01F2570FC002D296C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A3E11BA1F6CC44900B0693B /* NSObject_Rx.framework */,
 				1AFD13891F33EA8300047083 /* RxSwiftExt.framework */,
 				1AA976701F28389B00422915 /* RxCocoa.framework */,
 				1A4C29F11F2570FC002D296C /* RxSwift.framework */,
@@ -192,18 +203,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Warp Factor";
 				TargetAttributes = {
 					1A4C29D51F256861002D296C = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3V5265LQM9;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					1AB9298C1F4CFB3400B40D01 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3V5265LQM9;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -285,14 +297,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFD13961F3FA22500047083 /* WoolBag.swift in Sources */,
 				1AA9763E1F2805EA00422915 /* Loom.swift in Sources */,
+				1A83EE9F1FB2397D00597078 /* Synchronizable.swift in Sources */,
+				1AB97F661F9049390058FA0D /* HasDisposeBag.swift in Sources */,
+				1A1DD1B71F81C4CF003D2B24 /* UIWindow+Rx.swift in Sources */,
+				1A6B76631F675FE7005A560F /* UIWindow+Presentable.swift in Sources */,
 				1A4C29F61F2589AD002D296C /* Warp.swift in Sources */,
-				1A4C29FA1F258C0A002D296C /* Stitch.swift in Sources */,
 				1AA976401F280BC000422915 /* Presentable.swift in Sources */,
 				1AA976421F280BE700422915 /* UIViewController+Presentable.swift in Sources */,
 				1AA976AB1F2CED3700422915 /* UIViewController+Rx.swift in Sources */,
 				1A4C29F81F2589C7002D296C /* Weft.swift in Sources */,
+				1AB97F641F8C557C0058FA0D /* Stitch.swift in Sources */,
 				1AA976441F280FBE00422915 /* Weftable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,7 +341,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -334,7 +351,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -380,7 +401,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -388,7 +411,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -435,11 +462,12 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.Weavy;
+				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.weavy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -461,10 +489,11 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.Weavy;
+				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.weavy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -476,7 +505,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.WeavyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -488,7 +518,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.WeavyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -520,6 +551,7 @@
 				1AB929971F4CFB3400B40D01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
