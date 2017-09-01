@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/twittemb/Weavy.svg?branch=develop)](https://travis-ci.org/twittemb/Weavy)
+<img alt="Weavy Logo" src="https://raw.githubusercontent.com/twittemb/Weavy/develop/Resources/weavy_logo.png" width="200"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#weavy-aims-to">Weavy aims to</a><li><a href="#the-core-principles">The core principles</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul>
+------------------------------- | ---------------------------------
+Travis CI |  [![Build Status](https://travis-ci.org/twittemb/Weavy.svg?branch=develop)](https://travis-ci.org/twittemb/Weavy)
+
+<span style="float:none" />
 
 # About
 Weavy is a navigation framework for iOS applications based on a weaving pattern
@@ -83,7 +87,7 @@ A demo application is provided to illustrate the core mechanisms of weaving. It 
 - a main ApplicationWarp that represents the basic application navigation (a dashboard composed of two screens in a navigation stack)
 - an OnboardingWarp that represents an onboarding wizard that can be triggered within the first dashboard page (or automatically after 10s). The onboarding is composed of three screens in a navigation stack)
 
-# Tools & dependencies
+# Tools and dependencies
 
 Weavy relies on:
 - SwiftLint for static code analysis ([Github SwiftLint](https://github.com/realm/SwiftLint))
