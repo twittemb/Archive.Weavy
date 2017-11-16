@@ -6,7 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
 import Weavy
 import RxSwift
 
@@ -19,7 +18,7 @@ class SettingsWarp: Warp {
     let rootViewController = UISplitViewController()
 
     let settingsWeftable: SettingsWeftable
-    init(with weftable: SettingsWeftable) {
+    init(withService service: MoviesService, andWeftable weftable: SettingsWeftable) {
         self.settingsWeftable = weftable
     }
 

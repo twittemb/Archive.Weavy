@@ -12,9 +12,11 @@ import Weavy
 import RxSwift
 import RxCocoa
 
-class WatchedViewController: UIViewController, StoryboardBased, Weftable {
+class WatchedViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var moviesCollection: UICollectionView!
+    @IBOutlet private weak var moviesCollection: UICollectionView!
+
+    var viewModel: WatchedViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +29,11 @@ class WatchedViewController: UIViewController, StoryboardBased, Weftable {
 
 extension WatchedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.viewModel.movies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.weftSubject.onNext(DemoWeft.moviePicked(withId: 1))
+        self.viewModel.pick(movieId: self.viewModel.movies[indexPath.item].id)
     }
 }
 
@@ -45,36 +47,9 @@ extension WatchedViewController: UICollectionViewDataSource {
             cell = MovieCollectionViewCell()
         }
 
-        switch indexPath.item {
-        case 0:
-            cell.movieTitle.text = "Terminator"
-            cell.movieImage.image = UIImage(named: "terminator")
-            return cell
-        case 1:
-            cell.movieTitle.text = "Predator"
-            cell.movieImage.image = UIImage(named: "predator")
-            return cell
-        case 2:
-            cell.movieTitle.text = "Dune"
-            cell.movieImage.image = UIImage(named: "dune")
-            return cell
-        case 3:
-            cell.movieTitle.text = "First Constant"
-            cell.movieImage.image = UIImage(named: "firstcontact")
-            return cell
-        case 4:
-            cell.movieTitle.text = "Dune"
-            cell.movieImage.image = UIImage(named: "dune")
-            return cell
-        case 5:
-            cell.movieTitle.text = "First Constant"
-            cell.movieImage.image = UIImage(named: "firstcontact")
-            return cell
-        default:
-            cell.movieTitle.text = "Star Trek Beyond"
-            cell.movieImage.image = UIImage(named: "startrek")
-            return cell
-        }
+        cell.movieTitle.text = self.viewModel.movies[indexPath.item].title
+        cell.movieImage.image = UIImage(named: self.viewModel.movies[indexPath.item].image)
+        return cell
     }
 
 }

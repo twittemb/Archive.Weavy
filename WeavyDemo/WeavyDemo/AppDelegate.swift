@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let disposeBag = DisposeBag()
     var window: UIWindow?
     var loom = Loom()
-    let mainWarp = MainWarp()
+    let movieService = MoviesService()
+    lazy var mainWarp = {
+        return MainWarp(with: self.movieService)
+    }()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
