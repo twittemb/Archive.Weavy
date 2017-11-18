@@ -102,7 +102,7 @@ class WarpWeaver {
 
 /// the only purpose of a Loom is to handle the navigation that is
 /// declared in the Warps of the application.
-public class Loom {
+final public class Loom {
 
     private var warpWeavers = [WarpWeaver]()
     private let disposeBag = DisposeBag()
