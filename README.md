@@ -1,6 +1,9 @@
-<img alt="Weavy Logo" src="https://raw.githubusercontent.com/twittemb/Weavy/develop/Resources/weavy_logo.png" width="200"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#weavy-aims-to">Weavy aims to</a><li><a href="#the-core-principles">The core principles</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul>
-------------------------------- | ---------------------------------
-Travis CI |  [![Build Status](https://travis-ci.org/twittemb/Weavy.svg?branch=develop)](https://travis-ci.org/twittemb/Weavy)
+| <img alt="Weavy Logo" src="https://raw.githubusercontent.com/twittemb/Weavy/develop/Resources/weavy_logo.png" width="200"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#weavy-aims-to">Weavy aims to</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-weavy">How to use Weavy</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
+| -------------- | -------------- |
+| Travis CI | [![Build Status](https://travis-ci.org/twittemb/Weavy.svg?branch=develop)](https://travis-ci.org/twittemb/Weavy) |
+| Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Weavy.svg?style=flat)](http://cocoapods.org/pods/Weavy) |
+| Platform | [![Platform](https://img.shields.io/cocoapods/p/Weavy.svg?style=flat)](http://cocoapods.org/pods/Weavy) |
+| Licence | [![License](https://img.shields.io/cocoapods/l/Weavy.svg?style=flat)](http://cocoapods.org/pods/Weavy) |
 
 <span style="float:none" />
 
@@ -29,6 +32,26 @@ The disadvantage of these two solutions:
 - Express the navigation in a declarative way while addressing the majority of the navigation cases
 - Facilitate the cutting of an application into logical blocks of navigation
 
+# Installation
+
+## Carthage
+
+In your Cartfile:
+
+```ruby
+github "twittemb/Weavy"
+
+```
+
+## CocoaPods
+
+In your Podfile:
+
+```ruby
+pod 'Weavy'
+
+```
+
 # The core principles
 
 In a real world: *Weaving involves using a **loom** to interlace two sets of threads at right angles to each other: the **warp** which runs longitudinally and the **weft** that crosses it*
@@ -52,7 +75,15 @@ This sketch illustrates how we can factorize UIViewControllers and Storyboards.
 
 ## Warp, Weft and Stitch
 Combinaisons of Warps and Wefts describe all the possible navigation patterns within your application.
-Each **warp** defines a clear navigation area (that makes your application divided in well defined parts) in which every **weft** represent a specific presentation of a screen. This representation is called a **Stitch**. A **Stitch** can be presented in different ways such as "popup" or regular "show" screens.
+Each **warp** defines a clear navigation area (that makes your application divided in well defined parts) in which every **weft** represent a specific navigation action (push a VC on a stack, pop up a VC, ...).
+
+In the end the knit function has to return an array of **stitches**. A Stitch helps the Loom in knowing what it will have to deal with for the next navigation steps.
+
+Why an array of **stitches** ? For instance a UITabbarController is a pattern in which multiple navigations are done at the same time, and we need to tell the Loom something like that is happening.
+
+A **Stitch** tells the **Loom**: The next thing you have to handle is this particular **Presentable** and this particular **Weftable**. In some cases, the knit function can return an empty array because we know there won't be any further navigation after the one we are doing.
+
+The Demo application shows pretty much every possible cases. 
 
 ## Weftable
 The basic principle of navigation is very simple: it consists of successive views transitions in response to application state changes. These changes are usually due to users interactions, but they can also come from a low level layer of your application. We can imagine that a lose of network session could lead to a signin screen appearance.
@@ -70,15 +101,139 @@ It is up to the developper to:
 - define the Warps that represent in the best possible way its application sections (such as Dashboard, Onboarding, Settings, ...) in which significant navigation actions are needed
 - provide the Weftables that will trigger the **Loom** weaving process.
 
+# How to use Weavy
+
+## Code samples
+
+### How to declare a Warp
+
+The following Warp is used as a Navigation stack.
+
+```swift
+class WatchedWarp: Warp {
+
+    var head: UIViewController {
+        return self.rootViewController
+    }
+
+    let rootViewController = UINavigationController()
+
+    func knit(withWeft weft: Weft) -> [Stitch] {
+
+        guard let weft = weft as? AppWeft else { return Stitch.emptyStitches }
+
+        switch weft {
+
+        case .movieList:
+            return navigateToMovieListScreen()
+        case .moviePicked(let movieId):
+            return navigateToMovieDetailScreen(with: movieId)
+        case .castPicked(let castId):
+            return navigateToCastDetailScreen(with: castId)
+        default:
+            return Stitch.emptyStitches
+        }
+
+    }
+
+    private func navigateToMovieListScreen () -> [Stitch] {
+        let viewController = WatchedViewController.instantiate()
+        viewController.title = "Watched"
+        self.rootViewController.pushViewController(viewController, animated: true)
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+    }
+
+    private func navigateToMovieDetailScreen (with movieId: Int) -> [Stitch] {
+        let viewController = MovieDetailViewController.instantiate()
+        self.rootViewController.pushViewController(viewController, animated: true)
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+    }
+
+    private func navigateToCastDetailScreen (with castId: Int) -> [Stitch] {
+        let viewController = CastDetailViewController.instantiate()
+        self.rootViewController.pushViewController(viewController, animated: true)
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+    }
+
+}
+```
+
+### How to declare Wefts
+
+As Weft are seen like some states spread across the application, it seems pretty obvious to use an enum to declare them
+
+```swift
+enum AppWeft: Weft {
+    case apiKey
+    case movieList
+    case moviePicked (withId: Int)
+    case castPicked (withId: Int)
+    case settings
+}
+```
+
+### How to declare a Weftable
+
+In theory a Weftable, as it is a protocol, can be anything (a UIViewController for instance) by I suggest to isolate that behavior in a ViewModel or so.
+For simple cases (for instance when we only need to bootstrap a Warp with a first Weft and don't want to code a basic Weftable for that), Weavy provides a SingleWeftable class.
+
+```swift
+class WishlistViewModel: Weftable {
+
+    init() {
+        self.weftSubject.onNext(AppWeft.movieList)
+    }
+
+    @objc func settings () {
+        self.weftSubject.onNext(AppWeft.settings)
+    }
+}
+```
+
+### How to bootstrap the weaving process
+
+The weaving process will be bootstrapped in the AppDelegate.
+
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+    var loom = Loom()
+    let mainWarp = MainWarp()
+
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        guard let window = self.window else { return false }
+
+        Warps.whenReady(warp: mainWarp, block: { [unowned window] (head) in
+            window.rootViewController = head
+        })
+
+        loom.weave(fromWarp: mainWarp, andWeftable: SingleWeftable(withInitialWeft: DemoWeft.apiKey))
+
+        return true
+    }
+}
+```
+
+As a bonus, the Loom offers a Rx extension that allows you to track the weaving steps (Loom.rx.willKnit and Loom.rx.didKnit).
+
 ## Demo Application
-A demo application is provided to illustrate the core mechanisms of weaving. It consists of:
-- a main ApplicationWarp that represents the basic application navigation (a dashboard composed of two screens in a navigation stack)
-- an OnboardingWarp that represents an onboarding wizard that can be triggered within the first dashboard page (or automatically after 10s). The onboarding is composed of three screens in a navigation stack)
+A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:
+- a MainWarp that represents the main navigation flow (a settings screen and then a dashboard composed of two screens in a tab bar controller)
+- a WishlistWarp that represents a navigation stack of movies that you want to watch
+- a WatchedWarp that represents a navigation stack of movies that you've already seen
+- a SettingsWarp that represents the user's preferences in a master/detail presentation
+
+<br/>
+<kbd>
+<img style="border:2px solid black" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/Weavy/develop/Resources/Weavy.gif"/>
+</kbd>
 
 # Tools and dependencies
 
 Weavy relies on:
 - SwiftLint for static code analysis ([Github SwiftLint](https://github.com/realm/SwiftLint))
 - RxSwift to expose Wefts into Observables the Loom can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
-- RxSwiftExt which adds some usefull reactive operators not included in RxSwift ([Github RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt))
 - Reusable in the Demo App to ease the storyboard cutting into atomic ViewControllers ([Github Reusable](https://github.com/AliSoftware/Reusable))
