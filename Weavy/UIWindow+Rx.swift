@@ -14,7 +14,7 @@ extension Reactive where Base: UIWindow {
 
     /// Rx Single that is triggered once the UIWindow is displayed
     public var windowDidAppear: Single<Void> {
-        return self.sentMessage(#selector(Base.makeKeyAndVisible)).map(to: Void()).take(1).asSingle()
+        return self.sentMessage(#selector(Base.makeKeyAndVisible)).map {_ in return Void()}.take(1).asSingle()
     }
 
 }

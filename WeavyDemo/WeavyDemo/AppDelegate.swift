@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let window = self.window else { return false }
 
+        loom.rx.didKnit.subscribe(onNext: { (warp, weft) in
+            print ("did knit to warp=\(warp) weft=\(weft)")
+        }).disposed(by: self.disposeBag)
+
         Warps.whenReady(warp: mainWarp, block: { [unowned window] (head) in
             window.rootViewController = head
         })

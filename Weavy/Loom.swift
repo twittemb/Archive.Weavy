@@ -8,7 +8,26 @@
 
 import Foundation
 import RxSwift
-import RxSwiftExt
+
+// swiftlint:disable class_delegate_protocol
+
+/// Delegate used to communicate from a WarpWeaver
+protocol WarpWeaverDelegate: class {
+
+    /// Used to tell the delegate a new Warp is to be weaved
+    ///
+    /// - Parameter stitch: this stitch has a Warp nextPresentable
+    func weaveAnotherWarp (withStitch stitch: Stitch)
+
+    /// Used to triggered the delegate before the warp/weft is knitted
+    ///
+    /// - Parameters:
+    ///   - warp: the warp that is knitted
+    ///   - weft: the weft that is knitted
+    func willKnit (withWarp warp: Warp, andWeft weft: Weft)
+    func didKnit (withWarp warp: Warp, andWeft weft: Weft)
+}
+// swiftlint:enable class_delegate_protocol
 
 /// A WarpWeaver handles the weaving for a dedicated Warp
 /// It will listen for Wefts emitted be the Warp Weftable companion or
@@ -22,23 +41,18 @@ class WarpWeaver {
     /// or by the Weftables produced by the Warp.knit function
     private let wefts = PublishSubject<Weft>()
 
-    /// The Rx subject that holds all the stitch emitted by the Warp.knit function.
-    /// only the Stitches holding a Warp kind of presentable will be pushed into the subject
-    private let stitchesSubject = PublishSubject<Stitch>()
-
-    /// The Rx Stitched Observable fron the stitchesSubject
-    /// It is listened by the Loom
-    internal lazy var stitches: Observable<(Stitch)> = {
-        return self.stitchesSubject.asObservable()
-    }()
+    /// The delegate is used so that the WarpWeaver can communicate with the Loom
+    /// in the case of a new Warp to weave or before and after a knit process
+    private weak var delegate: WarpWeaverDelegate!
 
     internal let disposeBag = DisposeBag()
 
     /// Initialize a WarpWeaver
     ///
     /// - Parameter warp: The Warp to weave
-    init(forWarp warp: Warp) {
+    init(forWarp warp: Warp, withDelegate delegate: WarpWeaverDelegate) {
         self.warp = warp
+        self.delegate = delegate
     }
 
     /// Launch the weaving process
@@ -50,7 +64,9 @@ class WarpWeaver {
         self.wefts.asObservable().subscribe(onNext: { [unowned self] (weft) in
 
             // a new Weft has been triggered for this Warp. Let's knit it and see what Stitches come from that
+            self.delegate.willKnit(withWarp: self.warp, andWeft: weft)
             let stitches = self.warp.knit(withWeft: weft)
+            self.delegate.didKnit(withWarp: self.warp, andWeft: weft)
 
             // we know which stitches have been triggered by this navigation action
             // each one of these stitches will lead to a weaving action (for example, new warps to handle and new weftable to listen)
@@ -58,9 +74,9 @@ class WarpWeaver {
 
                 // if the stitch next presentable represents a Warp, it has to be processed at a higher level because
                 // the WarpWeaver only knowns about the warp it's in charge of.
-                // The WarpWeaver will expose it to the Loom via the stitchesSubjects
+                // The WarpWeaver will expose through its delegate
                 if stitch.nextPresentable is Warp {
-                    self.stitchesSubject.onNext(stitch)
+                    self.delegate.weaveAnotherWarp(withStitch: stitch)
                 } else {
                     // the stitch next presentable is not a warp, it can be processed at the WarpWeaver level
                     if  let nextPresentable = stitch.nextPresentable,
@@ -79,6 +95,7 @@ class WarpWeaver {
                                 .pausable(nextPresentable.rxVisible.startWith(true))
                                 .asDriver(onErrorJustReturn: VoidWeft()).drive(onNext: { [unowned self] (weft) in
                                     // the nextPresentable's weftable fires a new weft
+
                                     self.wefts.onNext(weft)
                                 }).disposed(by: nextPresentable.disposeBag)
 
@@ -106,6 +123,8 @@ final public class Loom {
 
     private var warpWeavers = [WarpWeaver]()
     private let disposeBag = DisposeBag()
+    internal let willKnitSubject = PublishSubject<(String, String)>()
+    internal let didKnitSubject = PublishSubject<(String, String)>()
 
     /// Initialize the Loom
     public init() {
@@ -119,27 +138,10 @@ final public class Loom {
     public func weave (fromWarp warp: Warp, andWeftable weftable: Weftable) {
 
         // a new WarpWeaver will handle this warp weaving
-        let warpWeaver = WarpWeaver(forWarp: warp)
+        let warpWeaver = WarpWeaver(forWarp: warp, withDelegate: self)
 
         // we stack the WarpWeavers so that we do not lose there reference (whereas it could be a leak)
         self.warpWeavers.append(warpWeaver)
-
-        // we listen for the Stitches that are exposed by this WarpWeaver
-        // In case those Stitches hlods Warps kind of presentable
-        // We launch a weaving process on them
-        warpWeaver.stitches.subscribe(onNext: { [unowned self] (stitch) in
-
-            guard   let nextWeftable = stitch.nextWeftable else {
-                    print ("A Warp must have a Weftable companion")
-                    return
-            }
-
-            if let nextWarp = stitch.nextPresentable as? Warp {
-                print ("Warp \(warp) has triggered a new Warp \(nextWarp)")
-                self.weave(fromWarp: nextWarp, andWeftable: nextWeftable)
-            }
-
-        }).disposed(by: self.disposeBag)
 
         // let's weave the Warp
         warpWeaver.weave(listeningToWeftable: weftable)
@@ -149,5 +151,54 @@ final public class Loom {
         warp.rxDismissed.subscribe(onSuccess: { [unowned self] (_) in
             self.warpWeavers.remove(at: warpIndex)
         }).disposed(by: self.disposeBag)
+    }
+}
+
+extension Loom: WarpWeaverDelegate {
+
+    func weaveAnotherWarp(withStitch stitch: Stitch) {
+        guard let nextWeftable = stitch.nextWeftable else {
+            print ("A Warp must have a Weftable companion")
+            return
+        }
+
+        if let nextWarp = stitch.nextPresentable as? Warp {
+            self.weave(fromWarp: nextWarp, andWeftable: nextWeftable)
+        }
+    }
+
+    func willKnit(withWarp warp: Warp, andWeft weft: Weft) {
+        if !(weft is VoidWeft) {
+            self.willKnitSubject.onNext(("\(warp)", "\(weft)"))
+        }
+    }
+
+    func didKnit(withWarp warp: Warp, andWeft weft: Weft) {
+        if !(weft is VoidWeft) {
+            self.didKnitSubject.onNext(("\(warp)", "\(weft)"))
+        }
+    }
+}
+
+// swiftlint:disable identifier_name
+extension Loom {
+
+    /// Reactive extension to a Loom
+    public var rx: Reactive<Loom> {
+        return Reactive(self)
+    }
+}
+// swiftlint:enable identifier_name
+
+extension Reactive where Base: Loom {
+
+    /// Rx Observable triggered before the Loom knit a Warp/Weft
+    public var willKnit: Observable<(String, String)> {
+        return self.base.willKnitSubject.asObservable()
+    }
+
+    /// Rx Observable triggered after the Loom knit a Warp/Weft
+    public var didKnit: Observable<(String, String)> {
+        return self.base.didKnitSubject.asObservable()
     }
 }

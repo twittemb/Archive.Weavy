@@ -12,6 +12,7 @@
 		1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29F11F2570FC002D296C /* RxSwift.framework */; };
 		1A4C29F61F2589AD002D296C /* Warp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F51F2589AD002D296C /* Warp.swift */; };
 		1A4C29F81F2589C7002D296C /* Weft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C29F71F2589C7002D296C /* Weft.swift */; };
+		1A4DB9601FC2678E008CDEAC /* RX+Pausable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DB95F1FC2678E008CDEAC /* RX+Pausable.swift */; };
 		1A6B76631F675FE7005A560F /* UIWindow+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */; };
 		1A83EE9F1FB2397D00597078 /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A83EE9E1FB2397D00597078 /* Synchronizable.swift */; };
 		1AA9763E1F2805EA00422915 /* Loom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9763D1F2805EA00422915 /* Loom.swift */; };
@@ -24,7 +25,6 @@
 		1AB929921F4CFB3400B40D01 /* Weavy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4C29D61F256861002D296C /* Weavy.framework */; };
 		1AB97F641F8C557C0058FA0D /* Stitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB97F631F8C557C0058FA0D /* Stitch.swift */; };
 		1AB97F661F9049390058FA0D /* HasDisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB97F651F9049380058FA0D /* HasDisposeBag.swift */; };
-		1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFD13891F33EA8300047083 /* RxSwiftExt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +46,7 @@
 		1A4C29F11F2570FC002D296C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A4C29F51F2589AD002D296C /* Warp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warp.swift; sourceTree = "<group>"; };
 		1A4C29F71F2589C7002D296C /* Weft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weft.swift; sourceTree = "<group>"; };
+		1A4DB95F1FC2678E008CDEAC /* RX+Pausable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RX+Pausable.swift"; sourceTree = "<group>"; };
 		1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Presentable.swift"; sourceTree = "<group>"; };
 		1A83EE9E1FB2397D00597078 /* Synchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
 		1AA9763D1F2805EA00422915 /* Loom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loom.swift; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFD138A1F33EA8300047083 /* RxSwiftExt.framework in Frameworks */,
 				1AA976711F28389B00422915 /* RxCocoa.framework in Frameworks */,
 				1A4C29F21F2570FC002D296C /* RxSwift.framework in Frameworks */,
 			);
@@ -120,6 +120,7 @@
 				1A6B76621F675FE7005A560F /* UIWindow+Presentable.swift */,
 				1AA976AA1F2CED3700422915 /* UIViewController+Rx.swift */,
 				1A1DD1B61F81C4CF003D2B24 /* UIWindow+Rx.swift */,
+				1A4DB95F1FC2678E008CDEAC /* RX+Pausable.swift */,
 			);
 			path = Weavy;
 			sourceTree = "<group>";
@@ -264,13 +265,11 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwiftExt.framework",
 			);
 			name = "⚙Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwiftExt.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -301,6 +300,7 @@
 				1A83EE9F1FB2397D00597078 /* Synchronizable.swift in Sources */,
 				1AB97F661F9049390058FA0D /* HasDisposeBag.swift in Sources */,
 				1A1DD1B71F81C4CF003D2B24 /* UIWindow+Rx.swift in Sources */,
+				1A4DB9601FC2678E008CDEAC /* RX+Pausable.swift in Sources */,
 				1A6B76631F675FE7005A560F /* UIWindow+Presentable.swift in Sources */,
 				1A4C29F61F2589AD002D296C /* Warp.swift in Sources */,
 				1AA976401F280BC000422915 /* Presentable.swift in Sources */,

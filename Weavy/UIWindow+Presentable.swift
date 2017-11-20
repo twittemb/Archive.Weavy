@@ -19,7 +19,7 @@ extension UIWindow: Presentable {
 
     /// Rx Observable that triggers a bool indicating if the current UIWindow is being displayed
     public var rxVisible: Observable<Bool> {
-        return self.rx.windowDidAppear.asObservable().map(to: true)
+        return self.rx.windowDidAppear.asObservable().map { true }
     }
 
     /// Rx Observable (Single trait) triggered when this UIWindow is dismissed

@@ -24,7 +24,6 @@ extension UIViewController: Presentable {
 
     /// Rx Observable (Single trait) triggered when this UIViewController is dismissed
     public var rxDismissed: Single<Void> {
-        return self.rx.dismissed.map(to: Void()).take(1).asSingle()
+        return self.rx.dismissed.map { _ -> Void in return Void() }.take(1).asSingle()
     }
-
 }
