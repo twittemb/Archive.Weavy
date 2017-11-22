@@ -9,8 +9,6 @@
 import Foundation
 import RxSwift
 
-// swiftlint:disable class_delegate_protocol
-
 /// Delegate used to communicate from a WarpWeaver
 protocol WarpWeaverDelegate: class {
 
@@ -27,7 +25,6 @@ protocol WarpWeaverDelegate: class {
     func willKnit (withWarp warp: Warp, andWeft weft: Weft)
     func didKnit (withWarp warp: Warp, andWeft weft: Weft)
 }
-// swiftlint:enable class_delegate_protocol
 
 /// A WarpWeaver handles the weaving for a dedicated Warp
 /// It will listen for Wefts emitted be the Warp Weftable companion or
