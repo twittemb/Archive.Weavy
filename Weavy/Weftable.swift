@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-fileprivate var subjectContext: UInt8 = 0
+private var subjectContext: UInt8 = 0
 
 /// a Weftable has only one purpose: emit Wefts that correspond to specific navigation states.
 /// The state changes lead to navigation actions in the context of a specific Warp
