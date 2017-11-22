@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import UIKit
 
-fileprivate var subjectContext: UInt8 = 0
+private var subjectContext: UInt8 = 0
 
 /// A Warp defines a clear navigation area. Combined to a Weft it leads to a navigation action
 public protocol Warp: Presentable {

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import ObjectiveC
 
-fileprivate var disposeBagContext: UInt8 = 0
+private var disposeBagContext: UInt8 = 0
 
 /// Each HasDisposeBag offers a unique Rx DisposeBag instance
 public protocol HasDisposeBag: Synchronizable {
