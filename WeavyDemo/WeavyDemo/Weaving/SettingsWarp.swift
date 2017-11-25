@@ -33,7 +33,10 @@ class SettingsWarp: Warp {
             let settingsListViewController = SettingsListViewController.instantiate()
             navigationController.viewControllers = [settingsListViewController]
             if let navigationBarItem = navigationController.navigationBar.items?[0] {
-                navigationBarItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self.settingsWeftable, action: #selector(SettingsWeftable.settingsDone)), animated: false)
+                let settingsButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done,
+                                                     target: self.settingsWeftable,
+                                                     action: #selector(SettingsWeftable.settingsDone))
+                navigationBarItem.setRightBarButton(settingsButton, animated: false)
             }
             self.rootViewController.viewControllers = [navigationController]
             return [Stitch(nextPresentable: navigationController, nextWeftable: settingsListViewController)]

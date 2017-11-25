@@ -15,7 +15,7 @@ import RxCocoa
 class SettingsViewController: UIViewController, StoryboardBased, Weftable {
 
     @IBOutlet weak var proceedButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
