@@ -22,6 +22,3 @@ enum DemoWeft: Weft {
     case settingsDone
     case about
 }
-
-
-

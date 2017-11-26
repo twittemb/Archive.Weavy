@@ -12,7 +12,7 @@ import RxSwift
 import UIKit
 
 class WishlistWarp: Warp {
-    
+
     var head: UIViewController {
         return self.rootViewController
     }
@@ -93,11 +93,3 @@ class WishlistWeftable: Weftable, HasDisposeBag {
         self.weftSubject.onNext(DemoWeft.settings)
     }
 }
-
-
-
-
-
-
-
-
