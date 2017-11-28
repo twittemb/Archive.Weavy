@@ -1,12 +1,14 @@
 //
-//  File.swift
+//  UIViewController+Rx.swift
 //  Weavy
 //
-//  Created by Thibault Wittemberg on 17-07-29.
+//  Created by Thibault Wittemberg on 17-07-25.
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
+// this code had been inspired by the project: https://github.com/devxoul/RxViewController
+// Its License can be found here: ../DependenciesLicenses/devxoul-RxViewController-License
+
 import UIKit
 import RxSwift
 import RxCocoa

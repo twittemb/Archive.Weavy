@@ -39,7 +39,6 @@
 
 /* Begin PBXFileReference section */
 		1A1DD1B61F81C4CF003D2B24 /* UIWindow+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Rx.swift"; sourceTree = "<group>"; };
-		1A3E11BA1F6CC44900B0693B /* NSObject_Rx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSObject_Rx.framework; path = Carthage/Build/iOS/NSObject_Rx.framework; sourceTree = "<group>"; };
 		1A4C29D61F256861002D296C /* Weavy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Weavy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4C29D91F256861002D296C /* Weavy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weavy.h; sourceTree = "<group>"; };
 		1A4C29DA1F256861002D296C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 		1AB929911F4CFB3400B40D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AB97F631F8C557C0058FA0D /* Stitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stitch.swift; sourceTree = "<group>"; };
 		1AB97F651F9049380058FA0D /* HasDisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDisposeBag.swift; sourceTree = "<group>"; };
-		1AFD13891F33EA8300047083 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +126,6 @@
 		1A4C29F01F2570FC002D296C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1A3E11BA1F6CC44900B0693B /* NSObject_Rx.framework */,
-				1AFD13891F33EA8300047083 /* RxSwiftExt.framework */,
 				1AA976701F28389B00422915 /* RxCocoa.framework */,
 				1A4C29F11F2570FC002D296C /* RxSwift.framework */,
 			);

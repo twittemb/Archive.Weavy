@@ -2,11 +2,12 @@
 //  Synchronizable.swift
 //  Weavy
 //
-//  Created by Thibault Wittemberg on 17-11-07.
+//  Created by Thibault Wittemberg on 17-07-25.
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
+// this code had been inspired by the project: https://github.com/RxSwiftCommunity/NSObject-Rx
+// Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-NSObject-Rx-License
 
 /// Provides a function to prevent concurrent block execution
 public protocol Synchronizable: class {
