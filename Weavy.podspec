@@ -25,7 +25,7 @@ Weavy aims to
   s.ios.deployment_target = "9.3"
   s.source       = { :git => "https://github.com/twittemb/Weavy.git", :tag => s.version.to_s }
   s.source_files  = "Weavy/**/*.swift"
-  s.frameworks  = 'Foundation', 'UIKit'
+  s.frameworks  = 'UIKit'
   s.requires_arc     = true  
   s.dependency 'RxSwift', '>= 4.0.0'
   s.dependency 'RxCocoa', '>= 4.0.0'

@@ -6,7 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 /// An abstraction of what can present a Loom. For now, UIViewControllers, Warps are Presentable

@@ -6,8 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
-
 /// A Stitch is the result of the weaving action between a Warp and a Weft (See Warp.knit function)
 /// It describes the next thing that will be presented (a Presentable) and
 /// the next thing the Loom will listen to have the next navigation steps (a Weftable).

@@ -1,14 +1,15 @@
 //
-//  DisposeBagable.swift
-//  NSObject-Rx
+//  HasDisposeBag.swift
+//  Weavy
 //
-//  Created by Thibault Wittemberg on 2017-08-25.
-//  Copyright © 2017 RxSwiftCommunity. All rights reserved.
+//  Created by Thibault Wittemberg on 17-07-25.
+//  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
+// this code had been inspired by the project: https://github.com/RxSwiftCommunity/NSObject-Rx
+// Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-NSObject-Rx-License
+
 import RxSwift
-import ObjectiveC
 
 private var disposeBagContext: UInt8 = 0
 

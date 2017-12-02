@@ -6,8 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
-
 /// A Weft describes a possible state of navigation
 public protocol Weft {
 }
