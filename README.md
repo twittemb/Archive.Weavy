@@ -116,11 +116,16 @@ class WatchedWarp: Warp {
         return self.rootViewController
     }
 
-    let rootViewController = UINavigationController()
+    private let rootViewController = UINavigationController()
+    private let service: MoviesService
+
+    init(withService service: MoviesService) {
+        self.service = service
+    }
 
     func knit(withWeft weft: Weft) -> [Stitch] {
 
-        guard let weft = weft as? AppWeft else { return Stitch.emptyStitches }
+        guard let weft = weft as? DemoWeft else { return Stitch.emptyStitches }
 
         switch weft {
 
@@ -137,24 +142,28 @@ class WatchedWarp: Warp {
     }
 
     private func navigateToMovieListScreen () -> [Stitch] {
-        let viewController = WatchedViewController.instantiate()
+        let viewModel = WatchedViewModel(with: self.service)
+        let viewController = WatchedViewController.instantiate(with: viewModel)
         viewController.title = "Watched"
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewModel)]
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> [Stitch] {
-        let viewController = MovieDetailViewController.instantiate()
+        let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
+        let viewController = MovieDetailViewController.instantiate(with: viewModel)
+        viewController.title = viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewModel)]
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> [Stitch] {
-        let viewController = CastDetailViewController.instantiate()
+        let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
+        let viewController = CastDetailViewController.instantiate(with: viewModel)
+        viewController.title = viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return Stitch.emptyStitches
     }
-
 }
 ```
 
@@ -163,12 +172,18 @@ class WatchedWarp: Warp {
 As Weft are seen like some states spread across the application, it seems pretty obvious to use an enum to declare them
 
 ```swift
-enum AppWeft: Weft {
+enum DemoWeft: Weft {
     case apiKey
+    case apiKeyIsComplete
+
     case movieList
-    case moviePicked (withId: Int)
-    case castPicked (withId: Int)
+
+    case moviePicked (withMovieId: Int)
+    case castPicked (withCastId: Int)
+
     case settings
+    case settingsDone
+    case about
 }
 ```
 
@@ -178,15 +193,21 @@ In theory a Weftable, as it is a protocol, can be anything (a UIViewController f
 For simple cases (for instance when we only need to bootstrap a Warp with a first Weft and don't want to code a basic Weftable for that), Weavy provides a SingleWeftable class.
 
 ```swift
-class WishlistViewModel: Weftable {
+class WatchedViewModel: Weftable {
 
-    init() {
-        self.weftSubject.onNext(AppWeft.movieList)
+    let movies: [MovieViewModel]
+
+    init(with service: MoviesService) {
+        // we can do some data refactoring in order to display things exactly the way we want (this is the aim of a ViewModel)
+        self.movies = service.watchedMovies().map({ (movie) -> MovieViewModel in
+            return MovieViewModel(id: movie.id, title: movie.title, image: movie.image)
+        })
     }
 
-    @objc func settings () {
-        self.weftSubject.onNext(AppWeft.settings)
+    public func pick (movieId: Int) {
+        self.weftSubject.onNext(DemoWeft.moviePicked(withMovieId: movieId))
     }
+
 }
 ```
 
@@ -197,14 +218,22 @@ The weaving process will be bootstrapped in the AppDelegate.
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let disposeBag = DisposeBag()
     var window: UIWindow?
     var loom = Loom()
-    let mainWarp = MainWarp()
+    let movieService = MoviesService()
+    lazy var mainWarp = {
+        return MainWarp(with: self.movieService)
+    }()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         guard let window = self.window else { return false }
+
+        loom.rx.didKnit.subscribe(onNext: { (warp, weft) in
+            print ("did knit to warp=\(warp) weft=\(weft)")
+        }).disposed(by: self.disposeBag)
 
         Warps.whenReady(warp: mainWarp, block: { [unowned window] (head) in
             window.rootViewController = head
