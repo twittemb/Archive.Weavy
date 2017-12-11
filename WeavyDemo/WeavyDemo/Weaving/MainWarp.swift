@@ -6,7 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
 import Weavy
 import RxSwift
 
@@ -16,11 +15,13 @@ class MainWarp: Warp {
         return self.rootViewController
     }
 
-    let rootViewController: UINavigationController
+    private let rootViewController: UINavigationController
+    private let service: MoviesService
 
-    init() {
+    init(with service: MoviesService) {
         self.rootViewController = UINavigationController()
         self.rootViewController.setNavigationBarHidden(true, animated: false)
+        self.service = service
     }
 
     func knit(withWeft weft: Weft) -> [Stitch] {
@@ -46,8 +47,8 @@ class MainWarp: Warp {
     private func navigationToDashboardScreen () -> [Stitch] {
         let tabbarController = UITabBarController()
         let wishlistWeftable = WishlistWeftable()
-        let wishListWarp = WishlistWarp(with: wishlistWeftable)
-        let watchedWarp = WatchedWarp()
+        let wishListWarp = WishlistWarp(withService: self.service, andWeftable: wishlistWeftable)
+        let watchedWarp = WatchedWarp(withService: self.service)
         Warps.whenReady(warp1: wishListWarp, warp2: watchedWarp, block: { [unowned self] (head1: UINavigationController, head2: UINavigationController) in
             let tabBarItem1 = UITabBarItem(title: "Wishlist", image: UIImage(named: "wishlist"), selectedImage: nil)
             let tabBarItem2 = UITabBarItem(title: "Watched", image: UIImage(named: "watched"), selectedImage: nil)

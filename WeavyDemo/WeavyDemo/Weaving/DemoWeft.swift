@@ -6,7 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
 import Weavy
 
 enum DemoWeft: Weft {
@@ -15,8 +14,8 @@ enum DemoWeft: Weft {
 
     case movieList
 
-    case moviePicked (withId: Int)
-    case castPicked (withId: Int)
+    case moviePicked (withMovieId: Int)
+    case castPicked (withCastId: Int)
 
     case settings
     case settingsDone

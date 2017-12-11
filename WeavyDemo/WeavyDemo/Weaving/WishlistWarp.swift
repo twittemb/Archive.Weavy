@@ -6,7 +6,6 @@
 //  Copyright © 2017 Warp Factor. All rights reserved.
 //
 
-import Foundation
 import Weavy
 import RxSwift
 import UIKit
@@ -17,10 +16,12 @@ class WishlistWarp: Warp {
         return self.rootViewController
     }
 
-    let rootViewController = UINavigationController()
+    private let rootViewController = UINavigationController()
+    private let wishlistWeftable: WishlistWeftable
+    private let service: MoviesService
 
-    let wishlistWeftable: WishlistWeftable
-    init(with weftable: WishlistWeftable) {
+    init(withService service: MoviesService, andWeftable weftable: WishlistWeftable) {
+        self.service = service
         self.wishlistWeftable = weftable
     }
 
@@ -45,8 +46,8 @@ class WishlistWarp: Warp {
     }
 
     private func navigateToMovieListScreen () -> [Stitch] {
-
-        let viewController = WishlistViewController.instantiate()
+        let viewModel = WishlistViewModel(with: self.service)
+        let viewController = WishlistViewController.instantiate(with: viewModel)
         viewController.title = "Wishlist"
         self.rootViewController.pushViewController(viewController, animated: true)
         if let navigationBarItem = self.rootViewController.navigationBar.items?[0] {
@@ -56,26 +57,28 @@ class WishlistWarp: Warp {
                                                                 action: #selector(WishlistWeftable.settings)),
                                                 animated: false)
         }
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewController.viewModel)]
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> [Stitch] {
-        print ("Movie picked with id: \(movieId)")
-        let viewController = MovieDetailViewController.instantiate()
+        let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
+        let viewController = MovieDetailViewController.instantiate(with: viewModel)
+        viewController.title = viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return [Stitch(nextPresentable: viewController, nextWeftable: viewModel)]
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> [Stitch] {
-        print ("Cast picked with id: \(castId)")
-        let viewController = CastDetailViewController.instantiate()
+        let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
+        let viewController = CastDetailViewController.instantiate(with: viewModel)
+        viewController.title = viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [Stitch(nextPresentable: viewController, nextWeftable: viewController)]
+        return Stitch.emptyStitches
     }
 
     private func navigateToSettings () -> [Stitch] {
         let settingsWeftable = SettingsWeftable()
-        let settingsWarp = SettingsWarp(with: settingsWeftable)
+        let settingsWarp = SettingsWarp(withService: self.service, andWeftable: settingsWeftable)
         Warps.whenReady(warp: settingsWarp, block: { [unowned self] (head: UISplitViewController) in
             self.rootViewController.present(head, animated: true)
         })

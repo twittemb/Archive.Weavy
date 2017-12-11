@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,10 +15,6 @@
         <scene sceneID="pv8-ht-M0K">
             <objects>
                 <viewController id="vFf-Cc-3q4" customClass="SettingsViewController" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="J3f-A1-1Yj"/>
-                        <viewControllerLayoutGuide type="bottom" id="REd-hg-ejW"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TRD-V9-6JA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,15 +80,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cXG-oX-j4H" firstAttribute="leading" secondItem="Pyu-XI-2aZ" secondAttribute="leading" id="3ym-7w-c9d"/>
-                            <constraint firstItem="RTb-e6-7Mj" firstAttribute="top" secondItem="J3f-A1-1Yj" secondAttribute="bottom" constant="-44" id="CDO-I7-XmH"/>
-                            <constraint firstAttribute="trailing" secondItem="cXG-oX-j4H" secondAttribute="trailing" id="Pf1-Z4-UJh"/>
+                            <constraint firstItem="RTb-e6-7Mj" firstAttribute="top" secondItem="spl-Fu-9DH" secondAttribute="top" constant="-44" id="CDO-I7-XmH"/>
+                            <constraint firstItem="spl-Fu-9DH" firstAttribute="trailing" secondItem="cXG-oX-j4H" secondAttribute="trailing" id="Pf1-Z4-UJh"/>
                             <constraint firstItem="cXG-oX-j4H" firstAttribute="bottom" secondItem="Pyu-XI-2aZ" secondAttribute="bottom" id="So3-JA-Hln"/>
-                            <constraint firstItem="cXG-oX-j4H" firstAttribute="leading" secondItem="TRD-V9-6JA" secondAttribute="leading" id="apJ-bN-Rfq"/>
+                            <constraint firstItem="cXG-oX-j4H" firstAttribute="leading" secondItem="spl-Fu-9DH" secondAttribute="leading" id="apJ-bN-Rfq"/>
                             <constraint firstItem="cXG-oX-j4H" firstAttribute="top" secondItem="Pyu-XI-2aZ" secondAttribute="top" id="dJI-DG-K2R"/>
                             <constraint firstAttribute="bottom" secondItem="Pyu-XI-2aZ" secondAttribute="bottom" id="gbq-cl-Rce"/>
                             <constraint firstItem="cXG-oX-j4H" firstAttribute="top" secondItem="TRD-V9-6JA" secondAttribute="top" id="qRm-MQ-cJg"/>
                             <constraint firstItem="cXG-oX-j4H" firstAttribute="trailing" secondItem="Pyu-XI-2aZ" secondAttribute="trailing" id="tke-mO-pqX"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="spl-Fu-9DH"/>
                     </view>
                     <connections>
                         <outlet property="proceedButton" destination="Mxs-1d-oI9" id="p4d-rI-gyy"/>

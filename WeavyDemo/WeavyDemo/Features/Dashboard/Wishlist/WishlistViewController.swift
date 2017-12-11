@@ -12,9 +12,11 @@ import Weavy
 import RxSwift
 import RxCocoa
 
-class WishlistViewController: UIViewController, StoryboardBased, Weftable {
+class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var moviesTable: UITableView!
+    @IBOutlet private weak var moviesTable: UITableView!
+
+    var viewModel: WishlistViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +24,15 @@ class WishlistViewController: UIViewController, StoryboardBased, Weftable {
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
     }
-
 }
 
 extension WishlistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.viewModel.movies.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.weftSubject.onNext(DemoWeft.moviePicked(withId: 1))
+        self.viewModel.pick(movieId: self.viewModel.movies[indexPath.item].id)
     }
 }
 
@@ -46,27 +47,8 @@ extension WishlistViewController: UITableViewDataSource {
             cell = MovieViewCell()
         }
 
-        switch indexPath.item {
-        case 0:
-            cell.movieTitle.text = "Star Trek Beyond"
-            cell.movieImage.image = UIImage(named: "startrek")
-            return cell
-        case 1:
-            cell.movieTitle.text = "Starwars: The force awakens"
-            cell.movieImage.image = UIImage(named: "starwars")
-            return cell
-        case 2:
-            cell.movieTitle.text = "Avatar"
-            cell.movieImage.image = UIImage(named: "avatar")
-            return cell
-        case 3:
-            cell.movieTitle.text = "Blade Runner"
-            cell.movieImage.image = UIImage(named: "bladerunner")
-            return cell
-        default:
-            cell.movieTitle.text = "Star Trek Beyond"
-            cell.movieImage.image = UIImage(named: "startrek")
-            return cell
-        }
+        cell.movieTitle.text = self.viewModel.movies[indexPath.item].title
+        cell.movieImage.image = UIImage(named: self.viewModel.movies[indexPath.item].image)
+        return cell
     }
 }
