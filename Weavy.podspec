@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Weavy"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.summary      = "Weavy is a navigation framework for iOS applications based on a weaving pattern."
 
   s.description  = <<-DESC
