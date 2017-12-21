@@ -14,6 +14,10 @@ This README is a short story of the whole conception process that leaded me to t
 
 Take a look at this wiki page to learn more about Weavy: [Weavy in details](https://github.com/twittemb/Weavy/wiki/Weavy-in-details)
 
+For a really detailed explanation, take a look at my blog:
+- Weavy Part 1 ([The theory](https://twittemb.github.io/swift/coordinator/reactive/rxswift/weaving/pattern/2017/11/08/weavy-part-1/))
+- Weavy Part 2 ([In practice](https://twittemb.github.io/swift/coordinator/reactive/rxswift/weaving/pattern/2017/12/09/weavy-part-2/))
+
 # Navigation concerns
 Regarding navigation within an iOS application, two choices are available:
 - Use the builtin mechanism provided by Apple and Xcode: storyboards and segues
