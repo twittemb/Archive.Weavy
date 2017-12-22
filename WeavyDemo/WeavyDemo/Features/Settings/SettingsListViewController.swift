@@ -18,7 +18,6 @@ class SettingsListViewController: UITableViewController, StoryboardBased, Weftab
         self.tableView.selectRow(at: IndexPath(row: 0, section: 0),
                                  animated: false,
                                  scrollPosition: UITableViewScrollPosition.none)
-        self.weftSubject.onNext(DemoWeft.apiKey)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

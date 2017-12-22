@@ -20,6 +20,7 @@ class SettingsWarp: Warp {
     let settingsWeftable: SettingsWeftable
     init(withService service: MoviesService, andWeftable weftable: SettingsWeftable) {
         self.settingsWeftable = weftable
+        self.rootViewController.preferredDisplayMode = .allVisible
     }
 
     func knit(withWeft weft: Weft) -> [Stitch] {
@@ -29,7 +30,9 @@ class SettingsWarp: Warp {
         switch weft {
         case .settings:
             let navigationController = UINavigationController()
+
             let settingsListViewController = SettingsListViewController.instantiate()
+
             navigationController.viewControllers = [settingsListViewController]
             if let navigationBarItem = navigationController.navigationBar.items?[0] {
                 let settingsButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done,
@@ -38,7 +41,13 @@ class SettingsWarp: Warp {
                 navigationBarItem.setRightBarButton(settingsButton, animated: false)
             }
             self.rootViewController.viewControllers = [navigationController]
-            return [Stitch(nextPresentable: navigationController, nextWeftable: settingsListViewController)]
+
+            let settingsViewController = SettingsViewController.instantiate()
+            settingsViewController.title = "Api Key"
+            self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
+
+            return [Stitch(nextPresentable: navigationController, nextWeftable: settingsListViewController),
+                    Stitch(nextPresentable: settingsViewController, nextWeftable: settingsViewController)]
         case .apiKey:
             let settingsViewController = SettingsViewController.instantiate()
             settingsViewController.title = "Api Key"
