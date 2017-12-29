@@ -17,11 +17,12 @@ Take a look at this wiki page to learn more about Weavy: [Weavy in details](http
 For a really detailed explanation, take a look at my blog:
 - Weavy Part 1 ([The theory](https://twittemb.github.io/swift/coordinator/reactive/rxswift/weaving/pattern/2017/11/08/weavy-part-1/))
 - Weavy Part 2 ([In practice](https://twittemb.github.io/swift/coordinator/reactive/rxswift/weaving/pattern/2017/12/09/weavy-part-2/))
+- Weavy Part 3 ([Tips and Tricks](https://twittemb.github.io/swift/coordinator/reactive/rxswift/pattern/weavy/router/2017/12/22/weavy-part-3-tips-and-tricks/))
 
 # Navigation concerns
 Regarding navigation within an iOS application, two choices are available:
 - Use the builtin mechanism provided by Apple and Xcode: storyboards and segues
--  Implement a custom mechanism directly in the code
+- Implement a custom mechanism directly in the code
 
 The disadvantage of these two solutions:
 - Builtin mechanism: navigation is relatively static and the storyboards are massive. The navigation code pollutes the UIViewControllers
@@ -68,38 +69,44 @@ This is how I imagine the weaving pattern in a simple application:
 
 How do I read this ?
 
-- Here we have three warps: **Application**, **Onboarding** and **Settings** which describe the three main navigation sections of the application.
-- We also have three wefts: **Dashboard** (the default weft triggered at the application bootstrap), **Set the server** and **Login**.
+- Here we have three Warps: **Application**, **Onboarding** and **Settings** which describe the three main navigation sections of the application.
+- We also have three Wefts: **Dashboard** (the default weft triggered at the application bootstrap), **Set the server** and **Login**.
+
+Weavy is based on an analogy with real life weaving process, so it is important to be familiar with the appropriate terminology:
+
+- **Warps** can be seen as your application navigation sections
+- **Wefts** are all the possible navigation states in your app
+- **Stitches** are to the junction between a Warp and a Weft. They represent the navigation actions
+- The **Loom** handles all this weaving mechanism
 
 Each one of these wefts will be triggered either because of user actions or because of backend state changes.
 The crossing between a warp and a weft represented by a colored chip will be a specific navigation action (such as a UIViewController appearance).
 
-As we can see, some wefts are used in multiple warps and their triggering will lead to the display of the same screen, but with different presentation options. Sometimes these screens will popup and sometimes they will be pushed in a navigation stack.
-This sketch illustrates how we can factorize UIViewControllers and Storyboards.
-
 ## Warp, Weft and Stitch
-Combinaisons of Warps and Wefts describe all the possible navigation patterns within your application.
-Each **warp** defines a clear navigation area (that makes your application divided in well defined parts) in which every **weft** represent a specific navigation action (push a VC on a stack, pop up a VC, ...).
+Combinaisons of Warps and Wefts describe all the possible navigation actions within your application.
+Each **Warp** defines a clear navigation area (that makes your application divided in well defined parts) in which every **Weft** represent a specific navigation action (push a VC on a stack, pop up a VC, ...).
 
-In the end the knit function has to return an array of **stitches**. A Stitch helps the Loom in knowing what it will have to deal with for the next navigation steps.
-
-Why an array of **stitches** ? For instance a UITabbarController is a pattern in which multiple navigations are done at the same time, and we need to tell the Loom something like that is happening.
+In the end the **knit()** function has to return an array of **Stitches**.
 
 A **Stitch** tells the **Loom**: The next thing you have to handle is this particular **Presentable** and this particular **Weftable**. In some cases, the knit function can return an empty array because we know there won't be any further navigation after the one we are doing.
 
 The Demo application shows pretty much every possible cases. 
 
+## Presentable
+Presentable is an abstraction of something that can be presented.
+Because a Weft cannot be emitted unless its associated Presentable is displayed,
+Presentable offers Reactive observables that the Loom will subscribe to (so it will be aware of the presentation state of the Presentable).
+Therefore this is no risk of firing a Weft while its Presentable is not yet fully displayed.
+
 ## Weftable
-The basic principle of navigation is very simple: it consists of successive views transitions in response to application state changes. These changes are usually due to users interactions, but they can also come from a low level layer of your application. We can imagine that a lose of network session could lead to a signin screen appearance.
-
-We need a way to express these changes. As we saw, a combinaison of a **Warp** and a **Weft** represent a navigation action. As well as warps can define your application areas, wefts can define these navigation state changes inside these areas.
-
-Considering this, a **Weftable** is basically "something" in the application which is able to express a new **Weft**, and as a consequence a navigation state change, leading to a navigation action.
+A Weftable can be anything: a custom UIViewController, a ViewModel, a Presenter…
+Once it is registered in the Loom, a Weftable can emits Wefts via its “weftSubject” property (which is a Rx subject).
+The Loom will listen for these Wefts and call the Warp’s “knit()” function.
 
 A **Weft** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens presented by the weaving process.
 
 ## Loom
-A loom is a just a tool for the developper. Once he has defined the suitable combinations of Warps and Wefts representing the navigation possibilities, the job of the loom is to weave these combinaisons into patterns, according to navigation state changes induced by Weftables. 
+A loom is a just a tool for the developper. Once he has defined the suitable combinations of Warps and Wefts representing the navigation possibilities, the job of the Loom is to weave these combinaisons into patterns, according to navigation state changes induced by Weftables. 
 
 It is up to the developper to:
 - define the Warps that represent in the best possible way its application sections (such as Dashboard, Onboarding, Settings, ...) in which significant navigation actions are needed
@@ -108,6 +115,26 @@ It is up to the developper to:
 # How to use Weavy
 
 ## Code samples
+
+### How to declare Wefts
+
+As Weft are seen like some states spread across the application, it seems pretty obvious to use an enum to declare them
+
+```swift
+enum DemoWeft: Weft {
+    case apiKey
+    case apiKeyIsComplete
+
+    case movieList
+
+    case moviePicked (withMovieId: Int)
+    case castPicked (withCastId: Int)
+
+    case settings
+    case settingsDone
+    case about
+}
+```
 
 ### How to declare a Warp
 
@@ -168,26 +195,6 @@ class WatchedWarp: Warp {
         self.rootViewController.pushViewController(viewController, animated: true)
         return Stitch.emptyStitches
     }
-}
-```
-
-### How to declare Wefts
-
-As Weft are seen like some states spread across the application, it seems pretty obvious to use an enum to declare them
-
-```swift
-enum DemoWeft: Weft {
-    case apiKey
-    case apiKeyIsComplete
-
-    case movieList
-
-    case moviePicked (withMovieId: Int)
-    case castPicked (withCastId: Int)
-
-    case settings
-    case settingsDone
-    case about
 }
 ```
 
